@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package             Blackbird_ContentManager
+ * @copyright           Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author              Blackbird Team
+ * @license             https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Search\Result" name="search.content.result" after="search.result" template="Blackbird_ContentManager::content/search/result.phtml" cacheable="false">
+                <block class="Blackbird\ContentManager\Block\Content\Widget\ContentList" name="search_content_result_list" template="Blackbird_ContentManager::content/widget/list.phtml" cacheable="false">
+                    <action method="setPager">
+                        <argument name="pager" xsi:type="boolean">true</argument>
+                    </action>
+                    <action method="setPagerPosition">
+                        <argument name="pager" xsi:type="string">1</argument>
+                    </action>
+                    <action method="setLimitPerPage">
+                        <argument name="limit_per_page" xsi:type="string">9</argument>
+                    </action>
+                    <action method="setLimitDisplay">
+                        <argument name="limit_display" xsi:type="string">45</argument>
+                    </action>
+                    <action method="setPageVarName">
+                        <argument name="page_var_name" xsi:type="string">c</argument>
+                    </action>
+                    <action method="addAttributeToShow">
+                        <argument name="attribute" xsi:type="string">title</argument>
+                        <argument name="params" xsi:type="array">
+                            <item name="has_link" xsi:type="string">1</item>
+                        </argument>
+                    </action>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

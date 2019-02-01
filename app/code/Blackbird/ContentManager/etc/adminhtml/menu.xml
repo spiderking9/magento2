@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Blackbird_ContentManager::settings"
+             title="Content Manager"
+             module="Blackbird_ContentManager"
+             sortOrder="30"
+             parent="Magento_Backend::content"
+             resource="Blackbird_ContentManager::settings"
+        />
+        <add id="Blackbird_ContentManager::contents"
+             title="Contents"
+             module="Blackbird_ContentManager"
+             sortOrder="40"
+             parent="Magento_Backend::content"
+             resource="Blackbird_ContentManager::contents"
+        />
+        <add id="Blackbird_ContentManager::contenttype"
+             title="Content Types"
+             module="Blackbird_ContentManager"
+             sortOrder="0"
+             parent="Blackbird_ContentManager::settings"
+             action="contentmanager/contenttype/"
+             resource="Blackbird_ContentManager::contenttype"
+        />
+        <add id="Blackbird_ContentManager::contentlist"
+             title="Content Lists"
+             module="Blackbird_ContentManager"
+             sortOrder="10"
+             parent="Blackbird_ContentManager::settings"
+             action="contentmanager/contentlist/"
+             resource="Blackbird_ContentManager::contentlist"
+        />
+        <add id="Blackbird_ContentManager::flag"
+             title="Store Flags"
+             module="Blackbird_ContentManager"
+             sortOrder="20"
+             parent="Blackbird_ContentManager::settings"
+             action="contentmanager/flag/"
+             resource="Blackbird_ContentManager::flag"
+        />
+        <add id="Blackbird_ContentManager::repeaterfields"
+             title="Repeater Fields"
+             module="Blackbird_ContentManager"
+             sortOrder="0"
+             parent="Blackbird_ContentManager::settings"
+             action="contentmanager/repeaterfields/"
+             resource="Blackbird_ContentManager::repeaterfields"
+        />
+    </menu>
+</config>

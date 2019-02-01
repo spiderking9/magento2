@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="blackbird_contenttype_fulltext_search" class="Blackbird\ContentManager\Model\Indexer\Mview\Action" group="indexer">
+        <subscriptions>
+            <table name="blackbird_contenttype_entity" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_int" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_decimal" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_text" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_varchar" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_datetime" entity_column="entity_id"/>
+            <table name="blackbird_contenttype_entity_store" entity_column="entity_id"/>
+        </subscriptions>
+    </view>
+</config>

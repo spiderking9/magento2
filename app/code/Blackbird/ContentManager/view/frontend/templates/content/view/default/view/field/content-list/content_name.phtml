@@ -1,0 +1,37 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\View\Field\ContentList */ ?>
+<?php
+$_contentListCollection = $block->getContentLists();
+?>
+<?php if ($_contentListCollection->count()) : ?>
+    <?php foreach ($_contentListCollection as $contentList): ?>
+        <span class="title"><?= $contentList->getTitle() ?></span>
+        <ul class="ct-content-list" id="ct-content-list-<?= $contentList->getUrl(); ?>">
+            <?php foreach ($contentList->getContentCollection(true) as $content) : ?>
+                <li class="item">
+                    <?php $_contentNameStripped = $block->stripTags($content->getTitle(), null, true); ?>
+                    <p class="content-title"><?= $_contentNameStripped; ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endforeach; ?>
+<?php else: ?>
+    <div class="message info empty">
+        <div><?= __('We can\'t find contents matching the selection.') ?></div>
+    </div>
+<?php endif; ?>

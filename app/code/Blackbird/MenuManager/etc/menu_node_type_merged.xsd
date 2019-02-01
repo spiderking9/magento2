@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:redefine schemaLocation="urn:magento:module:Blackbird_MenuManager:etc/menu_node_type.xsd">
+        <xs:complexType name="nodeTypeDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="nodeTypeDeclaration">
+                    <xs:sequence>
+                        <xs:element name="module_dependencies" type="moduleDependenciesDeclaration" minOccurs="0" maxOccurs="1" />
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string" use="required" />
+                    <xs:attribute name="label" type="xs:string" use="required" />
+                    <xs:attribute name="renderer_front" type="xs:string" use="optional" />
+                    <xs:attribute name="renderer_admin" type="xs:string" use="optional" />
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="moduleDependenciesDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="moduleDependenciesDeclaration">
+                    <xs:sequence>
+                        <xs:element name="dependency" type="dependencyDeclaration" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="dependencyDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="dependencyDeclaration">
+                    <xs:attribute name="module_name" type="xs:string" use="required" />
+                    <xs:attribute name="version" type="xs:string" use="required" />
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+</xs:schema>

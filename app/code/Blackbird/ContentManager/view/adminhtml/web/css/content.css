@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+.field-type-relation .control > input[type=text] {
+    display: inline-block;
+    width: 170px;
+}
+
+.field-type-relation .button-open-chooser,
+.field-type-relation .button-apply {
+    background: none;
+    font-size: 0;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0 0 0 1px;
+    border: none;
+    vertical-align: middle;
+}
+
+.field-type-relation .button-open-chooser {
+    background-image: url(../images/rule_chooser_trigger.gif);
+    background-repeat: no-repeat;
+}
+
+.field-type-relation .button-apply {
+    background-image: url(../images/rule_component_apply.gif);
+    background-repeat: no-repeat;
+}
+
+.field .category-select {
+    margin: 0 0 6px;
+    padding: 2px;
+    width: 67.999999997%;
+}
+
+.field .field-category_ids .mage-suggest-inner {
+    padding-right: 27px;
+}
+
+.field .field-category_ids .addon > button {
+    float: right;
+    margin-left: 2.127659574%;
+    width: 28.4%;
+}
+
+.field .field-category_ids .mage-suggest-search-label:after,
+.field .mage-new-category-dialog .mage-suggest-search-label:after {
+    color: #b2b2b2;
+    content: '\e013'; /* unordered list icon */
+    font-family: 'MUI-Icons';
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    position: absolute;
+    right: 5px;
+    speak: none;
+    top: 0;
+}
+
+/* Remove search icon for category search suggest field */
+.field .field-category_ids .category-select:after,
+.field .mage-new-category-dialog .category-select:after {
+    display: none;
+}
+
+#add_category_button {
+    display: none !important;
+}
+
+#add_category_button {
+    display: none !important;
+}
+
+/* REPEATERS FIELDS */
+.repeater-field-container {
+    overflow: hidden;
+    border-top: solid 1px #cccccc;
+    padding: 30px 0 0 0;
+}
+
+.repeater-field-container .actions {
+    padding: 2rem;
+}
+
+.repeater-field-container .repeater-field-header {
+    overflow: hidden;
+}
+
+.repeater-field-container .repeater-field-header > label span {
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.repeater-field-container .repeater-field-header {
+    margin: 30px 0;
+}
+
+.repeater-field-container .repeater-fields-nested .repeater-field-div .field-row {
+    display: block;
+    margin: 15px 0;
+    padding-bottom: 10px;
+}
+
+.repeater-field-container .repeater-fields-nested .repeater-field-div {
+    border-bottom: solid #cccccc 1px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+/* Align verticaly checkbox for repeaters */
+.repeater-field-container .repeater-field-div .field-row .nested {
+    display: inline-block;
+}
+
+/* Align verticaly radio button for repeaters*/
+.repeater-field-container .repeater-field-div .field-row .admin__field-option {
+    display: inline-block;
+    width: 100%;
+    padding-left: 20%;
+}
+
+.repeater-field-div .field-row .admin__control-wysiwig {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.repeater-fields-nested .actions {
+    text-align: right;
+    position: absolute;
+    right: 6rem;
+    top: 0;
+}

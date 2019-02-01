@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="content_manager_content_list" class="Blackbird\ContentManager\Block\Content\Widget\ContentList"
+            placeholder_image="Blackbird_ContentManager::images/icon-content-list.png">
+        <label translate="true">Content Manager Content List</label>
+        <description>List of Contents from the Content Manager extension</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="ct_type" xsi:type="select" required="true" visible="true"
+                       source_model="Blackbird\ContentManager\Model\Config\Source\ContentTypes">
+                <label translate="true">Content Type</label>
+                <description>Select the content type to list</description>
+            </parameter>
+            <parameter name="pager" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Page Control</label>
+            </parameter>
+            <parameter name="pager_position" xsi:type="select" required="true" visible="true"
+                       source_model="Blackbird\ContentManager\Model\Config\Source\ContentList\PagerPosition">
+                <label translate="true">Pager Position</label>
+                <depends>
+                    <parameter name="pager" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="limit_per_page" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Contents per Page</label>
+                <depends>
+                    <parameter name="pager" value="1"/>
+                </depends>
+                <value>5</value>
+            </parameter>
+            <parameter name="limit_display" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Contents to Display</label>
+                <value>10</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="content/widget/list.phtml" selected="true">
+                        <label translate="true">Content List Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="order_field" xsi:type="select" visible="true" required="true"
+                       source_model="Blackbird\ContentManager\Model\Config\Source\ContentType\CustomFields">
+                <label translate="true">Order Field</label>
+                <description>Select the sort order attribute</description>
+            </parameter>
+            <parameter name="sort_order" xsi:type="select" visible="true" required="true">
+                <label translate="true">Sort Order</label>
+                <options>
+                    <option name="asc" value="ASC" selected="true">
+                        <label translate="true">Ascending</label>
+                    </option>
+                    <option name="desc" value="DESC">
+                        <label translate="true">Descending</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="condition" xsi:type="conditions" visible="true" required="true" sort_order="10"
+                       class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Conditions">
+                <label translate="true">Conditions</label>
+            </parameter>
+            <parameter name="attributes_show" xsi:type="block" visible="true" required="false" sort_order="11">
+                <label translate="true">Attributes to show</label>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\ContentList\AttributeShow"/>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="content_manager_content_link" class="Blackbird\ContentManager\Block\Content\Widget\Link"
+            placeholder_image="Blackbird_ContentManager::images/icon-content-link.png" is_email_compatible="true">
+        <label translate="true">Content Manager Content Link</label>
+        <description>Link to a Specified Content</description>
+        <parameters>
+            <parameter name="content_id" xsi:type="block" visible="true" required="true" sort_order="10">
+                <label translate="true">Content</label>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Content...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="anchor_text" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Text</label>
+                <description translate="true">If empty, we'll use the content title here.</description>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Title</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="content/widget/link/link_block.phtml" selected="true">
+                        <label translate="true">Content Link Block Template</label>
+                    </option>
+                    <option name="link_inline" value="content/widget/link/link_inline.phtml">
+                        <label translate="true">Content Link Inline Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="content_manager_content_view" class="Blackbird\ContentManager\Block\Content\Widget\View"
+            placeholder_image="Blackbird_ContentManager::images/icon-content.png" is_email_compatible="true">
+        <label translate="true">Content Manager Content View</label>
+        <description>Link to a Specified Content</description>
+        <parameters>
+            <parameter name="content_id" xsi:type="block" visible="true" required="true" sort_order="10">
+                <label translate="true">Content</label>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Content...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

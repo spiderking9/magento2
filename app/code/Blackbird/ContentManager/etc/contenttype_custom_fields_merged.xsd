@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:redefine schemaLocation="urn:magento:module:Blackbird_ContentManager:etc/contenttype_custom_fields.xsd">
+        <xs:complexType name="fieldDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="fieldDeclaration">
+                    <xs:sequence>
+                        <xs:element name="inputType" type="inputTypeDeclaration" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string" use="required"/>
+                    <xs:attribute name="label" type="xs:string" use="required"/>
+                    <xs:attribute name="renderer" type="modelName" use="required"/>
+                    <xs:attribute name="optionRenderer" type="modelName" use="optional"/>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="inputTypeDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="inputTypeDeclaration">
+                    <xs:attribute name="label" type="xs:string" use="required"/>
+                    <xs:attribute name="renderer" type="modelName" use="optional"/>
+                    <xs:attribute name="is_repeater_compatible" type="xs:boolean" use="optional"/>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+</xs:schema>

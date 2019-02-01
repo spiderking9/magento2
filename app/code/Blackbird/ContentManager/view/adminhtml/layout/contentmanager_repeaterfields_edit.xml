@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Blackbird_ContentManager::css/contenttype.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\RepeaterFields\Edit\Tabs" name="contentmanager_repeaterfields_edit_tabs">
+                <!-- Define blocks -->
+                <block class="Blackbird\ContentManager\Block\Adminhtml\RepeaterFields\Edit\Tab\Main" name="contentmanager_repeaterfields_edit_tab_main"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout" name="contentmanager_repeaterfields_edit_tab_layout"/>
+                <!-- Add tabs -->
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_repeaterfields_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">layout_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_repeaterfields_edit_tab_layout</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\RepeaterFields\Edit" name="contentmanager_repeaterfields_edit"/>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Blackbird_ContentManager::contenttype/edit/contenttype-js.phtml" name="contenttype.js"/>
+        </referenceContainer>
+    </body>
+</page>

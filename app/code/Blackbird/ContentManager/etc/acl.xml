@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="Blackbird_ContentManager::settings" title="Settings">
+                        <resource id="Blackbird_ContentManager::contenttype" title="Content Type">
+                            <resource id="Blackbird_ContentManager::contenttype_save" title="Save Content Type"/>
+                            <resource id="Blackbird_ContentManager::contenttype_delete" title="Delete Content Type"/>
+                        </resource>
+                        <resource id="Blackbird_ContentManager::contentlist" title="Content Lists">
+                            <resource id="Blackbird_ContentManager::contentlist_save" title="Save Content List"/>
+                            <resource id="Blackbird_ContentManager::contentlist_delete" title="Delete Content List"/>
+                        </resource>
+                        <resource id="Blackbird_ContentManager::flag" title="Store Flags"/>
+                        <resource id="Blackbird_ContentManager::repeaterfields" title="Repeater Fields">
+                            <resource id="Blackbird_ContentManager::repeaterfields_save" title="Save Repeater Fields"/>
+                            <resource id="Blackbird_ContentManager::repeaterfields_delete" title="Delete Repeater Fields"/>
+                        </resource>
+                    </resource>
+                    <resource id="Blackbird_ContentManager::contents" title="Contents">
+                        <resource id="Blackbird_ContentManager::content_save" title="Save Content"/>
+                        <resource id="Blackbird_ContentManager::content_delete" title="Delete Content"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

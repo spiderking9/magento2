@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<!-- @todo Need to refactor the xml structure -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Blackbird_ContentManager:etc/contenttype_custom_fields.xsd">
+    <!-- text fields -->
+    <field name="text" label="Text" renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Text">
+        <inputType name="field" label="Field" is_repeater_compatible="true"/>
+        <inputType name="area" label="Area" is_repeater_compatible="true"/>
+        <inputType name="password" label="Password" is_repeater_compatible="true"/>
+        <inputType name="integer" label="Integer" is_repeater_compatible="true"/>
+    </field>
+    <!-- file fields -->
+    <field name="file" label="File"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\File"
+           optionRenderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\File">
+        <inputType name="file" label="File" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\File\File" is_repeater_compatible="true"/>
+        <inputType name="image" label="Image" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\File\Image" is_repeater_compatible="true"/>
+    </field>
+    <!-- select fields -->
+    <field name="select" label="Select"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Select"
+           optionRenderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Select">
+        <inputType name="drop_down" label="Drop-down" is_repeater_compatible="true"/>
+        <inputType name="radio" label="Radio Buttons" is_repeater_compatible="true"/>
+        <inputType name="checkbox" label="Checkbox" is_repeater_compatible="true"/>
+        <inputType name="multiple" label="Multiple Select" is_repeater_compatible="true"/>
+    </field>
+    <!-- date fields -->
+    <field name="date" label="Date"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Date"
+           optionRenderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Date">
+        <inputType name="date" label="Date" is_repeater_compatible="true"/>
+        <inputType name="date_time" label="Date &amp; Time" is_repeater_compatible="true"/>
+    </field>
+    <!-- relation fields -->
+    <field name="relation" label="Relation"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Relation"
+           optionRenderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Relation">
+        <inputType name="product" label="Product" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\Product" is_repeater_compatible="true"/>
+        <inputType name="category" label="Category" is_repeater_compatible="true"/>
+        <inputType name="content" label="Content" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\Content" is_repeater_compatible="true"/>
+        <inputType name="content-list" label="Content List" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\ContentList" is_repeater_compatible="true"/>
+        <inputType name="attribute" label="Attribute" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\Attribute" is_repeater_compatible="true"/>
+        <inputType name="customer" label="Customer" renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\Customer" is_repeater_compatible="true"/>
+    </field>
+    <!-- misc fields -->
+    <!-- todo refactor: should accept array type + configurable restricted values -->
+    <field name="misc" label="Misc"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Misc"
+           optionRenderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Misc">
+        <inputType name="country" label="Country" is_repeater_compatible="true"/>
+        <inputType name="currency" label="Currency" is_repeater_compatible="true"/>
+        <inputType name="locale" label="Locale" is_repeater_compatible="true"/>
+    </field>
+    <!-- repeater fields -->
+    <field name="repeater_fields" label="Repeater Fields"
+           renderer="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\RepeaterFields">
+        <inputType renderer="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\RepeaterFields\RepeaterFields" name="repeater_fields" label="Repeater Fields" is_repeater_compatible="false"/>
+    </field>
+</config>
+   

@@ -1,0 +1,191 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Field
+ */
+?>
+<?= $block->getTemplatesFieldsHtml() ?>
+<script id="custom-field-base-template" type="text/x-magento-template">
+    <div class="fieldset-wrapper admin__collapsible-block-wrapper opened"
+         id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>">
+        <div class="fieldset-wrapper-title" id="custom-field-title">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#fieldset-<%- data.id %>-field-<%- data.field_id %>-content">
+                <span id="field_<%- data.id %>_header_title"><%- data.title %></span>
+            </strong>
+            <div class="actions">
+                <button type="button" title="<?= __('Delete Custom Field') ?>" class="action-delete"
+                        id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_delete">
+                    <span><?= __('Delete Custom Field') ?></span>
+                </button>
+            </div>
+            <div
+                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_move"
+                    data-role="draggable-handle" class="draggable-handle"
+                    title="<?= __('Sort Custom Fields'); ?>"></div>
+        </div>
+        <div class="fieldset-wrapper-content in collapse"
+             id="fieldset-<%- data.id %>-field-<%- data.field_id %>-content">
+            <fieldset class="fieldset">
+                <fieldset class="fieldset-alt"
+                          id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>">
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_is_delete"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][is_delete]"
+                            type="hidden" value=""/>
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_previous_type"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][previous_type]"
+                            type="hidden" value="<%- data.type %>"/>
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_previous_group"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][previous_group]"
+                            type="hidden" value="<%- data.group %>"/>
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_id"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][id]"
+                            type="hidden" value="<%- data.field_id %>"/>
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_field_id"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][option_id]"
+                            type="hidden" value="<%- data.field_uid %>"/>
+                    <input
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][sort_order]"
+                            type="hidden" value="<%- data.sort_order %>"/>
+
+                    <div class="field field-field-title required">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_title">
+                            <?= __('Title') ?>
+                        </label>
+                        <div class="control">
+                            <input
+                                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_title"
+                                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][title]"
+                                    class="required-entry input-text"
+                                    type="text"
+                                    value="<%- data.title %>"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="field field-field-identifier required">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_identifier">
+                            <?= __('Identifier') ?>
+                        </label>
+                        <div class="control">
+                            <input
+                                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_identifier"
+                                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][identifier]"
+                                <?php // Set maximum length to 25, in case of an image field, "_orig" is added to the duplicate attribute ?>
+                                    class="required-entry input-text validate-code required-custom-field-identifier validate-length maximum-length-25"
+                                    type="text"
+                                    value="<%- data.identifier %>"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="field field-field-input-type required">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_type">
+                            <?= __('Input Type') ?>
+                        </label>
+                        <div class="control field-type">
+                            <?= $block->getTypeSelectHtml() ?>
+                        </div>
+                    </div>
+
+                    <div class="field field-field-is_require">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_is_require">
+                            <?= __('Required') ?>
+                        </label>
+                        <div class="control">
+                            <select
+                                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_is_require"
+                                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][is_require]">
+                                <option value="0"><?= __('No') ?></option>
+                                <option value="1"><?= __('Yes') ?></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field field-field-show_in_grid">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_show_in_grid">
+                            <?= __('Show In Grid') ?>
+                        </label>
+                        <div class="control">
+                            <select
+                                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_show_in_grid"
+                                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][show_in_grid]">
+                                <option value="0"><?= __('No') ?></option>
+                                <option value="1"><?= __('Yes') ?></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field field-field-note">
+                        <label class="label"
+                               for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_note">
+                            <?= __('Note') ?>
+                        </label>
+                        <div class="control">
+                            <input
+                                    id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_note"
+                                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][note]"
+                                    class="input-text"
+                                    type="text"
+                                    value="<%- data.note %>"
+                            >
+                        </div>
+                    </div>
+                    <div class="fieldset-alt-search">
+                        <div class="field field-field-is_searchable">
+                            <label class="label"
+                                   for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_is_searchable">
+                                <?= __('Is Searchable') ?>
+                            </label>
+                            <div class="control">
+                                <select
+                                        id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_is_searchable"
+                                        name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][is_searchable]">
+                                    <option value="0"><?= __('No') ?></option>
+                                    <option value="1"><?= __('Yes') ?></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field field-field-search_weight">
+                            <label class="label"
+                                   for="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_search_weight">
+                                <?= __('Search Attribute Weight') ?>
+                            </label>
+                            <div class="control">
+                                <?= $block->getSearchWeightSelectHtml() ?>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,25 @@
+<?php /** @var $block \Blackbird\MenuManager\Block\Adminhtml\Menu\Edit\Nodes */ ?>
+<fieldset class="fieldset admin__fieldset fieldset-wide" id="menu_tree_editor">
+
+    <div style="overflow: auto">
+        <!-- The nodes tree-->
+        <div class="admin__field field field-title" data-mage-init='{"menuManagerEditorInit":{}}'
+             id="menumanager_tree_container">
+            <?= $block->renderNodes(); ?>
+        </div>
+
+        <!-- The buttons to add/delete nodes -->
+        <div class="admin__field field field-title" data-mage-init='{"menuManagerEditorAdd":{}}'
+             class="node-buttons-container">
+            <button data-create-root="true"><?= __('Add root menu') ?></button>
+        </div>
+        <div class="admin__field field field-title" data-mage-init='{"menuManagerEditorAdd":{}}'
+             class="node-buttons-container">
+            <button data-create-child="true"><?= __('Add child menu') ?></button>
+        </div>
+        <div class="admin__field field field-title" data-mage-init='{"menuManagerEditorAdd":{}}'
+             class="node-buttons-container">
+            <button data-remove="true"><?= __('Delete selected node') ?></button>
+        </div>
+    </div>
+</fieldset>

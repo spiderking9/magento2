@@ -1,0 +1,37 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+$_productCollection = $block->getProductCollection(['name']);
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+?>
+<?php if (!$_productCollection->count()) : ?>
+    <div class="message info empty">
+        <div><?= __('We can\'t find products matching the selection.') ?></div>
+    </div>
+<?php else: ?>
+    <ol class="ct-product-list" id="ct-product-list-<?= $block->getIdentifier(); ?>">
+        <?php foreach ($_productCollection as $_product) : ?>
+            <div class="product-item-info item">
+                <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                <p class="product-name"><a href="<?= $_product->getProductUrl() ?>"
+                                           title="<?= $_productNameStripped; ?>"><?= $_helper->productAttribute($_product,
+                            $_product->getName(), 'name'); ?></a></p>
+                <?= $block->getProductPrice($_product) ?>
+            </div>
+        <?php endforeach; ?>
+    </ol>
+<?php endif; ?>

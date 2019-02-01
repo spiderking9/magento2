@@ -1,0 +1,106 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Group */ ?>
+<script id="contenttype-content-layout-item-group" type="text/x-magento-template">
+    <div class="grid-layout-item grid-layout-item-group column-draggable admin__collapsible-block-wrapper opened"
+         id="contenttype_layout_item_group_<%- data.id %>">
+        <div class="grid-layout-item-title column-handler">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#contenttype_layout_item_group_<%- data.id %>_content">
+                <span>Group</span> - <label class="group-label"></label>
+            </strong>
+            <div class="actions">
+                <button type="button" title="Delete Group" class="action-delete" id="grid-layout-item-delete">
+                    <span>Delete Group</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid-layout-item-content group in collapse"
+             id="contenttype_layout_item_group_<%- data.id %>_content">
+            <fieldset class="grid-layout-item-fieldset">
+                <fieldset class="grid-layout-item-alt" id="contenttype_layout_item_group_<%- data.id %>_form">
+                    <input class="input_id" type="hidden" name="layout[item][group][<%- data.id %>][id]"
+                           value="<%- data.uid %>"/>
+                    <input class="input_column" type="hidden" name="layout[item][group][<%- data.id %>][column]"
+                           value="<%- data.column %>"/>
+                    <input class="input_parent_id" type="hidden" name="layout[item][group][<%- data.id %>][parent_id]"
+                           value="<%- data.parent_id %>"/>
+                    <input class="input_type" type="hidden" name="layout[item][group][<%- data.id %>][type]"
+                           value="<%- data.item %>"/>
+                    <input class="input_sort_order" type="hidden" name="layout[item][group][<%- data.id %>][sort_order]"
+                           value="<%- data.sort_order %>"/>
+                    <input class="input_is_delete" type="hidden" name="layout[item][group][<%- data.id %>][is_delete]"/>
+                    <!-- Form -->
+                    <div class="field">
+                        <label class="label" for=""><?= __('Label') ?></label>
+                        <div class="control">
+                            <input class="layout_group_html_name input-text" type="text"
+                                   name="layout[item][group][<%- data.id %>][html_name]" value="<%- data.html_name %>"/>
+                            <div class="note"><?= __('Label that can be displayed upper the group') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-group-label_option"><?= __('Label Option') ?></label>
+                        <div class="control">
+                            <?= $block->getLabelSelectHtml('layout-group-label_option') ?>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-group-html-label"><?= __('Label HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-group-html-label" class="layout_group_html_label_tag input-text"
+                                   type="text" name="layout[item][group][<%- data.id %>][html_label_tag]"
+                                   value="<%- data.html_label_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-group-html-tag"><?= __('Wrapper HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-group-html-tag" class="layout_group_html_tag input-text" type="text"
+                                   name="layout[item][group][<%- data.id %>][html_tag]" value="<%- data.html_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-group-html-id"><?= __('Wrapper HTML Element ID') ?></label>
+                        <div class="control">
+                            <input id="layout-group-html-id" class="layout_group_html_id input-text" type="text"
+                                   name="layout[item][group][<%- data.id %>][html_id]" value="<%- data.html_id %>"/>
+                            <div class="note"><?= __('Replace default element ID') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"
+                               for="layout-group-html-class"><?= __('Wrapper HTML Element Classes') ?></label>
+                        <div class="control">
+                            <input id="layout-group-html-class" class="layout_group_html_class input-text" type="text"
+                                   name="layout[item][group][<%- data.id %>][html_class]"
+                                   value="<%- data.html_class %>"/>
+                            <div class="note"><?= __('Additionnal CSS class(es) for the element') ?></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <div class="column-dropable grid-layout-item-group-area" rel="<%- data.id %>">
+                <span><?= __('Drag and drop your child items here') ?></span>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,30 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php /** @var $block \Blackbird\MenuManager\Block\Adminhtml\NodeType\Group */ ?>
+
+<div class="admin__field field field-title" data-mage-init='{"menuManagerGroup":{"type":"group"}}'>
+    <label class="label admin__field-label" for="group-id">Link to first child </label>
+    <div class="admin__field-control control">
+        <select
+            id="menumanager-link-first-child"
+            class="input-select admin__control-select"
+            data-mage-init='{"menuManagerEditorRename":{"type":"link_first_child"}}'>
+            <?php foreach($block->getLinkFirstChild() as $item):?>
+                <option value="<?php echo $item['value']; ?>"><?php echo $item['label'];?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+<?php
+$collection = $block->getCollection();
+/** @var \Blackbird\ContentManager\Model\ContentList $contentList */
+$contentList = $block->getContentList();
+$link = $block->getLink();
+?>
+<div class="block widget contents-grid grid ct-view ct-listing-<?= $contentList->getUrlKey() ?>"
+     id="ct-listing-<?= $contentList->getId() ?>">
+    <?php if (!empty($block->getTitle())) : ?>
+        <div class="block-title">
+            <strong><?= $block->getTitle() ?></strong>
+        </div>
+    <?php endif; ?>
+    <div class="block-content">
+
+        <div class="text-before"><?= $block->getTextBefore() ?></div>
+
+        <?php if ($collection->count()) : ?>
+            <?php if ($block->hasPagerTop()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar top">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div class="contents-items widget-content-grid">
+                <?php foreach ($collection as $content) : ?>
+                    <div class="content-item">
+                        <?php // Has Link Top ?>
+                        <?php if ($block->hasLinkTop() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                        <?php // Content List Layout Manager ?>
+                        <?php if (!empty($block->getChildBlock('contentlist_view_layout'))) : ?>
+                            <?php
+                            $listItem = $block->getChildBlock('contentlist_view_layout');
+                            $listItem->setContent($content);
+                            $listItem->setAllHasLink(true);
+
+                            echo $listItem->toHtml();
+                            ?>
+                            <?php // Default Content List Display ?>
+                        <?php else : ?>
+                            <?php if (count($block->getAttributeToShow()) == 0) : ?>
+                                <?= $content->render('title', ['has_link' => true]); ?>
+                            <?php else: ?>
+                                <?php foreach ($block->getAttributeToShow() as $attribute) : ?>
+                                    <?= $content->render($attribute['attribute'], $attribute['params']); ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php // Has Link Bottom ?>
+                        <?php if ($block->hasLinkBottom() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div style="clear: both"></div>
+
+            <?php if ($block->hasPagerBottom()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar bottom">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?= __('We can\'t find contents matching the selection.') ?></span>
+            </div>
+        <?php endif; ?>
+
+        <div class="text-after"><?= $block->getTextAfter() ?></div>
+    </div>
+</div>

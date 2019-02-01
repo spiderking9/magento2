@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Blackbird_ContentManager::css/content-grid.css"/>
+        <css src="Blackbird_ContentManager::css/store-flag.css"/>
+    </head>
+    <body>
+       <referenceContainer name="content">
+           <block class="Blackbird\ContentManager\Block\Adminhtml\Content" name="adminhtml.block.contentmanager.content.grid.container">
+               <block class="Magento\Backend\Block\Widget\Grid" name="adminhtml.block.contentmanager.content.grid" as="grid">
+                    <!-- Config Grid -->
+                   <arguments>
+                        <argument name="id" xsi:type="string">contentmanager_content_grid</argument>
+                        <argument name="dataSource" xsi:type="object">Blackbird\ContentManager\Model\ResourceModel\Content\Grid\Collection</argument>
+                        <argument name="default_sort" xsi:type="string">entity_id</argument>
+                        <argument name="default_dir" xsi:type="string">ASC</argument>
+                        <argument name="save_parameters_in_session" xsi:type="string">1</argument>                        
+                    </arguments>
+                   <!-- Mass Action Options -->
+                   <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="adminhtml.system.backup.grid.massaction" as="grid.massaction">
+                        <arguments>
+                            <argument name="massaction_id_field" xsi:type="string">entity_id</argument>
+                            <argument name="form_field_name" xsi:type="string">id</argument>
+                            <argument name="use_select_all" xsi:type="string">1</argument>
+                            <argument name="options" xsi:type="array">
+                                <item name="delete" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Delete</item>
+                                    <item name="url" xsi:type="string">*/*/massDelete</item>
+                                    <item name="confirm" xsi:type="string" translate="true">Are you sure you want to delete the selected content(s) ?</item>
+                                </item>
+                                <item name="export" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Export</item>
+                                    <item name="url" xsi:type="string">*/*/massExport</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                   <!-- Columns -->
+                   <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Grid\ColumnSet" name="adminhtml.contentmanager.contenttype.grid.columnSet" as="grid.columnSet">
+                        <!-- Edit on row click action -->
+                       <arguments>
+                            <argument name="rowUrl" xsi:type="array">
+                                <item name="path" xsi:type="string">*/*/edit</item>
+                                <item name="extraParamsTemplate" xsi:type="array">
+                                    <item name="id" xsi:type="string">getEntityId</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                       <!-- Columns : ID | Flag | Title | Url Key | Status | Creation Time | Update Time | Store View -->
+                       <block class="Magento\Backend\Block\Widget\Grid\Column" as="entity_id">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">ID</argument>
+                                <argument name="width" xsi:type="string">50px</argument>
+                                <argument name="align" xsi:type="string">right</argument>
+                                <argument name="type" xsi:type="string">number</argument>
+                                <argument name="index" xsi:type="string">entity_id</argument>
+                                <argument name="column_css_class" xsi:type="string">col-id</argument>
+                                <argument name="header_css_class" xsi:type="string">col-id</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="flag">
+                            <arguments>
+                                <argument name="renderer" xsi:type="string">Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Grid\Column\Renderer\Flag</argument>
+                                <argument name="header" xsi:type="string" translate="true">Flag</argument>
+                                <argument name="index" xsi:type="string"></argument>
+                                <argument name="filter" xsi:type="boolean">false</argument>
+                                <argument name="sortable" xsi:type="boolean">false</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="title">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Title</argument>
+                                <argument name="index" xsi:type="string">title</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="url_key">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">URL Key</argument>
+                                <argument name="index" xsi:type="string">url_key</argument>
+                            </arguments>
+                        </block>
+                        <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Grid\Column\Store" as="store_view">
+                            <arguments>
+                                <argument name="renderer" xsi:type="string">Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Grid\Column\Renderer\Store</argument>
+                                <argument name="header" xsi:type="string" translate="true">Store View</argument>
+                                <argument name="type" xsi:type="string">store</argument>
+                                <argument name="index" xsi:type="string">store</argument>
+                                <argument name="sortable" xsi:type="boolean">false</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="status">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Status</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="index" xsi:type="string">status</argument>
+                                <argument name="options" xsi:type="array">
+                                    <item name="disabled" xsi:type="array">
+                                        <item name="value" xsi:type="string">0</item>
+                                        <item name="label" xsi:type="string" translate="true">Disabled</item>
+                                    </item>
+                                    <item name="enabled" xsi:type="array">
+                                        <item name="value" xsi:type="string">1</item>
+                                        <item name="label" xsi:type="string" translate="true">Enabled</item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="created_at">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Created</argument>
+                                <argument name="type" xsi:type="string">datetime</argument>
+                                <argument name="index" xsi:type="string">created_at</argument>
+                                <argument name="column_css_class" xsi:type="string">col-date</argument>
+                                <argument name="header_css_class" xsi:type="string">col-date</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="updated_at">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Modified</argument>
+                                <argument name="type" xsi:type="string">datetime</argument>
+                                <argument name="default" xsi:type="string" translate="true">n/a</argument>
+                                <argument name="index" xsi:type="string">updated_at</argument>
+                                <argument name="column_css_class" xsi:type="string">col-date</argument>
+                                <argument name="header_css_class" xsi:type="string">col-date</argument>
+                            </arguments>
+                        </block>
+                       <!-- Link Edit/Delete -->
+                       <block class="Magento\Backend\Block\Widget\Grid\Column" as="action">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Action</argument>
+                                <argument name="index" xsi:type="string">entity_id</argument>
+                                <argument name="renderer" xsi:type="string">Blackbird\ContentManager\Block\Adminhtml\Grid\Renderer\Multiaction</argument>
+                                <argument name="sortable" xsi:type="boolean">false</argument>
+                                <argument name="filter" xsi:type="boolean">false</argument>
+                                <argument name="actions" xsi:type="array">
+                                    <item name="edit" xsi:type="array">
+                                        <item name="caption" xsi:type="string" translate="true">Edit</item>
+                                        <item name="url" xsi:type="array">
+                                            <item name="base" xsi:type="string">*/*/edit</item>
+                                        </item>
+                                        <item name="field" xsi:type="string">id</item>
+                                    </item>
+                                    <item name="delete" xsi:type="array">
+                                        <item name="caption" xsi:type="string" translate="true">Delete</item>
+                                        <item name="url" xsi:type="array">
+                                            <item name="base" xsi:type="string">*/*/delete</item>
+                                        </item>
+                                        <item name="field" xsi:type="string">id</item>
+                                        <item name="confirm" xsi:type="string" translate="true">Are you sure you want to delete this content ?</item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+       </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Blackbird_ContentManager::content/edit/content-js.phtml" name="content-export-all.js"/>
+        </referenceContainer>
+   </body>
+</page>

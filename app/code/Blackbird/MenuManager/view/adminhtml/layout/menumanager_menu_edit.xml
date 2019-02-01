@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Blackbird_MenuManager::css/jstree/style.min.css" />
+        <css src="Blackbird_MenuManager::css/treeNode.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Blackbird\MenuManager\Block\Adminhtml\Menu\Edit" template="Blackbird_MenuManager::menu/edit.phtml">
+            <block class="Blackbird\MenuManager\Block\Adminhtml\Menu\Edit\Main" name="menumanager_edit_main" />
+            <block class="Blackbird\MenuManager\Block\Adminhtml\Menu\Edit\NodesData" name="menumanager_edit_nodesdata"
+                   template="Blackbird_MenuManager::menu/nodes_data.phtml"/>
+            </block>
+          </referenceContainer>
+          <referenceContainer name="left">
+                  <block class="Blackbird\MenuManager\Block\Adminhtml\Menu\Edit\Nodes" name="menumanager_edit_node" template="Blackbird_MenuManager::menu/nodes.phtml"/>
+      </referenceContainer>
+  </body>
+</page>

@@ -1,0 +1,124 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\File */ ?>
+<script id="contenttype-content-layout-item-field-file" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-file">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-file">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-labelext-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="file_filename_without"
+            <% if (data.format == 'file_filename_without' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-labelext-format">
+                <?= __('Use filename as label (without extension)') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-labelwext-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="file_filename_with"
+            <% if (data.format == 'file_filename_with') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-labelwext-format">
+                <?= __('Use filename as label (with extension)') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format custom_label required-entry _required"
+                   id="layout-item-field-<%- data.id %>-customlabel-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="file_custom_label"
+            <% if (data.format == 'file_custom_label') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-customlabel-format">
+                <?= __('Custom label') ?>
+            </label>
+            <br/>
+            <div class="format-extra">
+                <input type="text" class="input-text layout_field_format_extra"
+                       id="layout-item-field-<%- data.id %>-extra-format"
+                       name="layout[item][field][<%- data.id %>][format_extra]"
+                       value="<%- data.format_extra %>"/>
+                <div class="note">
+                    <?= __('You can use replacement pattern.<br/>Example: <strong>{{title}}</strong> will be automatically replaced by the field value of the content (field with the identifier "title").<br/>Use plain text value of a field, type <strong>{{title|plain}}</strong>') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-image" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-image">
+    <label class="label" for=""><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-image">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-cropped-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="image_cropped"
+            <% if (data.format == 'image_cropped' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-cropped-format">
+                <?= __('Use cropped image if existing') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-original-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="image_original"
+            <% if (data.format == 'image_original') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-original-format">
+                <?= __('Use original image') ?>
+            </label>
+            <br/>
+            <input type="checkbox" class="checkbox layout_field_format_link"
+                   id="layout-item-field-<%- data.id %>-link-format"
+                   name="layout[item][field][<%- data.id %>][link]" value="1"
+            <% if (data.link == '1') { %>checked="checked"<% } %>
+            >
+            <label for="layout-item-field-<%- data.id %>-link-format">
+                <?= __('Link to original image') ?>
+            </label>
+            <br/>
+            <div class="format-extra">
+                <label for="layout-item-field-<%- data.id %>-height-format">
+                    <?= __('Height') ?>
+                </label>
+                <input type="text" class="input-text layout_field_format_height"
+                       id="layout-item-field-<%- data.id %>-height-format"
+                       name="layout[item][field][<%- data.id %>][format_height]"
+                       value="<%- data.format_height %>"/>
+                <br/>
+                <label for="layout-item-field-<%- data.id %>-width-format">
+                    <?= __('Width') ?>
+                </label>
+                <input type="text" class="input-text layout_field_format_width"
+                       id="layout-item-field-<%- data.id %>-width-format"
+                       name="layout[item][field][<%- data.id %>][format_width]"
+                       value="<%- data.format_width %>"/>
+                <div class="note">
+                    <?= __('Type 0 for a dynamic height, or dynamic width, depending on the other value. Put the 2 fields at 0 for no resize.') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</script>

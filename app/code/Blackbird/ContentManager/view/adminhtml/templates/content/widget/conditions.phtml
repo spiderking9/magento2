@@ -1,0 +1,47 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\Content\Widget\Conditions
+ */
+?>
+<?php
+$element = $block->getElement();
+$fieldId = ($element->getHtmlContainerId()) ? 'id="'.$element->getHtmlContainerId().'"' : '';
+$fieldClass = "field admin__field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($element->getRequired()) ? ' required' : '';
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" ' . $block->getUiId('form-field', $element->getId());
+?>
+
+<div <?= $fieldAttributes ?>>
+    <?= $element->getLabelHtml() ?>
+    <div class="control admin__field-control">
+        <div class="rule-tree">
+            <div class="rule-tree-wrapper">
+                <?= $block->getInputHtml() ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "Magento_Rule/rules",
+        "prototype"
+    ], function (VarienRulesForm) {
+        window.<?= $block->getHtmlId() ?> = new VarienRulesForm('<?= $block->getHtmlId() ?>', '<?= $block->getNewChildUrl() ?>');
+    });
+</script>

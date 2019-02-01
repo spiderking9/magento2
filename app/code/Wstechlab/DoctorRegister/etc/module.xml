@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Wstechlab_DoctorRegister" setup_version="0.0.1" >
+        <sequence>
+            <module name="Wstechlab_BaseRegister" />
+        </sequence>
+        <depends>
+            <module name="Wstechlab_BaseRegister" />
+        </depends>
+    </module>
+</config>

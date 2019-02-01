@@ -1,0 +1,20 @@
+{
+  "name": "wstechlab/b2b_register",
+  "description": "....",
+  "require": {
+    "php": "~7.0.0"
+  },
+  "type": "magento2-module",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Wstechlab\\B2bRegister\\": ""
+    }
+  }
+}

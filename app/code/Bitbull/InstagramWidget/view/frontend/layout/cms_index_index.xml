@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="content">
+            <container name="product.collections2" htmlTag="div" htmlClass="collections2" after="-">
+                <container name="homepage.instagram.widget" htmlTag="div" htmlClass="instagram-widget-container">
+                    <block class="Bitbull\InstagramWidget\Block\Instagram" name="instagram.widget" template="Bitbull_InstagramWidget::instagram-widget.phtml" ifconfig="instagram/settings/enabled_homepage">
+                        <arguments>
+                            <argument translate="true" name="title" xsi:type="string">Instagram</argument>
+                        </arguments>
+                    </block>
+                </container>
+
+                <block class="Magento\Cms\Block\Block" name="instagram_info" before="homepage.instagram.widget">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string" translate="true">instagram_info</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,53 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php /** @var $block \Blackbird\MenuManager\Block\Adminhtml\NodeType\CmsBlock */?>
+
+<div class="admin__field field field-title"  data-ui-id="cmsblock-chooser" data-mage-init='{"menuManagerCmsBlock":{"type":"cms_block"}}'>
+    <label class="label admin__field-label" for="cms_block_identifier">Block Identifier</label>
+    <div class="admin__field-control control">
+        <input class="input-text admin__control-text" id="cms_block_identifier" name="cmsblock-field" type="text" data-mage-init='{"menuManagerEditorRename":{"type":"entity_id"}}'/>
+        <?= $block->getOpenChooserButtonHtml();?>
+        <?= $block->getApplyButtonHtml();?>
+    </div>
+</div>
+
+<script>
+    require([
+        "jquery",
+        "Blackbird_MenuManager/js/content"
+    ], function(jQuery){
+        jQuery(function ($) {
+            var contentSet = $('[data-ui-id=cmsblock-chooser]');
+            contentSet.contentEdit(<?= $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+                [
+                    'formKey' => $block->getFormKey(),
+                    'fieldId' => 'cms_block_identifier',
+                    'fieldName' => 'cmsblock-field',
+                    'fieldType' => 'cms_block',
+                    'urlSource' => $block->getUrlSource(),
+                ]
+            )?>);
+        });
+    });
+</script>
+<script>
+    require([
+        "Blackbird_MenuManager/js/chooser",
+        "prototype"
+    ], function(RelationChooserForm){
+        window.cms_block_identifier = new RelationChooserForm('cms_block_identifier');
+    });
+</script>

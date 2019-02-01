@@ -1,0 +1,251 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Relation */ ?>
+<script id="contenttype-content-layout-item-field-product" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-product">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-product">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_product_name"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="product_name"
+            <% if (data.format == 'product_name' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_product_name">
+                <?= __('Display products names') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_product_image"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="product_name_image"
+            <% if (data.format == 'product_name_image') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_product_image">
+                <?= __('Display products names and images') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_product_price"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="product_name_price"
+            <% if (data.format == 'product_name_price') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_product_price">
+                <?= __('Display products names and prices') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_product_image_price"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="product_name_image_price"
+            <% if (data.format == 'product_name_image_price') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_product_image_price">
+                <?= __('Display products names, images and prices') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_product_all"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="product_all"
+            <% if (data.format == 'product_all') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_product_all">
+                <?= __('Display products as they are usually on listing') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-category" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-category">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-category">
+            <input type="checkbox" class="checkbox layout_field_format"
+                   id="layout-item-field-<%- data.id %>-display_categories"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="category_name"
+            <% if (data.format == 'category_name') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_categories">
+                <?= __('Display categories names') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-content" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-content">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-content">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_name_link"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_name_linked"
+            <% if (data.format == 'content_name_linked' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_name_link">
+                <?= __('Display contents names with links') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_name"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_name"
+            <% if (data.format == 'content_name') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_name">
+                <?= __('Display contents names') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_list"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_list"
+            <% if (data.format == 'content_list') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_list">
+                <?= __('Display contents as they render in list view') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_view"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_view"
+            <% if (data.format == 'content_view') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_view">
+                <?= __('Display content as they render in single view') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-content-list" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-content">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-content">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_name_list_link"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_name_linked"
+            <% if (data.format == 'content_name_linked' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_name_list_link">
+                <?= __('Display contents names with links from content list') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_list_name"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_name"
+            <% if (data.format == 'content_name') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_list_name">
+                <?= __('Display contents names from content list') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_content_list_list"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="content_list"
+            <% if (data.format == 'content_list') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_content_list_list">
+                <?= __('Display contents as they render in list view') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-attribute" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-attribute">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-attribute">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_attribute_lvalue"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="attribute_list_values"
+            <% if (data.format == 'attribute_list_values') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_attribute_lvalue">
+                <?= __('Display all values as a list (ul > li)') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_attribute_ltitle"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="attribute_list_titles"
+            <% if (data.format == 'attribute_list_titles' || data.format == '') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_attribute_ltitle">
+                <?= __('Display all titles as a list (ul > li)') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_attribute_cvalue"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="attribute_comma_values"
+            <% if (data.format == 'attribute_comma_values') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_attribute_cvalue">
+                <?= __('Concatenate all values by a comma (value1, value2)') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_attribute_ctitle"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="attribute_comma_titles"
+            <% if (data.format == 'attribute_comma_titles') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_attribute_ctitle">
+                <?= __('Concatenate all titles by a comma (value1, value2)') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<!-- todo add extra params -->
+<script id="contenttype-content-layout-item-field-customer" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-customer">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-customer">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-display_customers"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="customer_name"
+            <% if (data.format == 'customer_name') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-display_customers">
+                <?= __('Display customer names') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>

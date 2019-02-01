@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+/**
+*  Icons depending of the node type
+*/
+
+.jstree-default li[data\-type=category] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -96px -36px;
+}
+
+.jstree-default li[data\-type=product] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -160px -36px;
+}
+
+.jstree-default li[data\-type=cms_page] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -128px -36px;
+}
+
+.jstree-default li[data\-type=cms_block] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -256px -36px;
+}
+
+.jstree-default li[data\-type=customfield] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -224px -36px;
+}
+
+.jstree-default li[data\-type=group] > a > i
+{
+    margin-left: -8px;
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -64px -36px;
+}
+
+.jstree-default li[data\-type=content] > a > i
+{
+    margin-left: -8px;
+    background-image: url("./jstree/blackbird_32px.png");
+    background-position: -192px -36px;
+}
+
+.jstree-default li[data\-type=contentlist] > a > i
+{
+    margin-left: -8px;
+    background-image: url("./jstree/blackbird_32px.png");
+    background-position: -193px -68px;
+}
+
+/* Icons for open nodes with children*/
+.jstree-default .jstree-open>.jstree-ocl
+{
+
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -100px -4px;
+}
+
+/* Icons for closed nodes with children */
+.jstree-default .jstree-closed>.jstree-ocl
+{
+    background-image: url("jstree/blackbird_32px.png");
+    background-position: -132px -4px;
+}
+
+.jstree-default .jstree-node
+{
+    background-image: url("jstree/blackbird_32px.png");
+    background-position:-292px -4px;
+    background-repeat:repeat-y;
+}
+
+
+.jstree-default .jstree-leaf > .jstree-ocl
+{
+    background-image: url("jstree/blackbird_32px.png");
+    background-position:-68px -4px;
+}
+

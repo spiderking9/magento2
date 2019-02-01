@@ -1,0 +1,70 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\ContentList */ ?>
+
+<?php
+$_element = $block->getElement();
+
+$isRepeater = $_element->getIsInRepeater();
+if($isRepeater) {
+    $_element->setHtmlId($_element->getIdentifierField());
+}
+?>
+?>
+<div
+    class="admin__field field <?= $block->getRelationClass() ?> field-<?= $_element->getName() ?> <?= $_element->getRequired() != '0'
+        ? 'required _required' : '' ?> <?= !empty($_element->getNote()) ? 'with-note' : '' ?>"
+    data-ui-id="contentmanager-content-edit-form-fieldset-element-form-field-<?= $_element->getHtmlId() ?>">
+    <?= $_element->getLabelHtml() ?>
+    <div class="admin__field-control control">
+        <?= $_element->getElementHtml() ?>
+        <?= $block->getOpenChooserButtonHtml() ?>
+        <?= $block->getApplyButtonHtml() ?>
+
+        <?php if (!empty($_element->getNote())) : ?>
+            <div class="note" id="<?= $_element->getHtmlId() ?>-note"><?= $_element->getNote() ?></div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script>
+    require([
+        "jquery",
+        "Blackbird_ContentManager/js/content"
+    ], function (jQuery) {
+        var contentSetCtList = $("[data-ui-id='contentmanager-content-edit-form-fieldset-element-form-field-<?= $_element->getHtmlId() ?>']");
+        var json = <?= $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+            [
+                'formKey' => $block->getFormKey(),
+                'fieldId' => $_element->getHtmlId(),
+                'fieldName' => $_element->getName(),
+                'fieldType' => $block->getFieldType()
+            ]
+        )?>;
+
+        json['urlSource'] = '<?=$block->getUrlSource(true)?>' + 'form/<?= $_element->getHtmlId() ?>';
+        contentSetProduct.contentEdit(json);
+    });
+</script>
+<script>
+    require([
+        "Blackbird_ContentManager/js/chooser",
+        "prototype"
+    ], function (RelationChooserForm) {
+        window.<?php echo $_element->getHtmlId() ?> = new RelationChooserForm('<?php echo $_element->getHtmlId() ?>');
+    });
+</script>

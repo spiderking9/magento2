@@ -1,0 +1,114 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field */ ?>
+
+<?= $block->getTemplateFieldsTypeHtml() ?>
+
+<script id="contenttype-content-layout-item-field" type="text/x-magento-template">
+    <div class="grid-layout-item grid-layout-item-field column-draggable admin__collapsible-block-wrapper opened"
+         id="contenttype_layout_item_field_<%- data.id %>">
+        <div class="grid-layout-item-title column-handler">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#contenttype_layout_item_field_<%- data.id %>_content">
+                <span>Field</span> - <label class="field-title">Page Title</label>
+            </strong>
+            <div class="actions">
+                <button type="button" title="Delete Block" class="action-delete" id="grid-layout-item-delete">
+                    <span>Delete Field</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid-layout-item-content field in collapse"
+             id="contenttype_layout_item_field_<%- data.id %>_content">
+            <fieldset class="grid-layout-item-fieldset">
+                <fieldset class="grid-layout-item-alt" id="contenttype_layout_item_field_<%- data.id %>_form">
+                    <input class="input_temp_id" type="hidden" name="layout[item][field][<%- data.id %>][temp_id]"
+                           value="<%- data.id %>"/>
+                    <input class="input_id" type="hidden" name="layout[item][field][<%- data.id %>][id]"
+                           value="<%- data.uid %>"/>
+                    <input class="input_column" type="hidden" name="layout[item][field][<%- data.id %>][column]"
+                           value="<%- data.column %>"/>
+                    <input class="input_parent_id" type="hidden" name="layout[item][field][<%- data.id %>][parent_id]"
+                           value="<%- data.parent_id %>"/>
+                    <input class="input_type" type="hidden" name="layout[item][field][<%- data.id %>][type]"
+                           value="<%- data.item %>"/>
+                    <input class="input_sort_order" type="hidden" name="layout[item][field][<%- data.id %>][sort_order]"
+                           value="<%- data.sort_order %>"/>
+                    <input class="input_is_delete" type="hidden" name="layout[item][field][<%- data.id %>][is_delete]"/>
+                    <!-- Form -->
+                    <div class="field">
+                        <label class="label" for="layout-field-custom_field_id"><?= __('Select Field') ?></label>
+                        <div class="control">
+                            <select id="layout-field-custom_field_id" class="layout_field_custom_field_id"
+                                    name="layout[item][field][<%- data.id %>][custom_field_id]">
+                                <option value=""><?= __('Page Title') ?></option>
+                                <?php foreach ($block->getCustomFields() as $customField) : ?>
+                                    <option type="<?= $customField['type'] ?>"
+                                            value="<?= $customField['value'] ?>"><?= $customField['label'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-label_option"><?= __('Label Option') ?></label>
+                        <div class="control">
+                            <?= $block->getLabelSelectHtml('layout-field-label_option') ?>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-label"><?= __('Label HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-label" class="layout_field_html_label_tag input-text"
+                                   type="text" name="layout[item][field][<%- data.id %>][html_label_tag]"
+                                   value="<%- data.html_label_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-tag"><?= __('Wrapper HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-tag" class="layout_field_html_tag input-text" type="text"
+                                   name="layout[item][field][<%- data.id %>][html_tag]" value="<%- data.html_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-id"><?= __('Wrapper HTML Element ID') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-id" class="layout_field_html_id input-text" type="text"
+                                   name="layout[item][field][<%- data.id %>][html_id]" value="<%- data.html_id %>"/>
+                            <div class="note"><?= __('Replace default element ID') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"
+                               for="layout-field-html-class"><?= __('Wrapper HTML Element Classes') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-class" class="layout_field_html_class input-text" type="text"
+                                   name="layout[item][field][<%- data.id %>][html_class]"
+                                   value="<%- data.html_class %>"/>
+                            <div class="note"><?= __('Additionnal CSS class(es) for the element') ?></div>
+                        </div>
+                    </div>
+                    <div class="layout-field-format"></div>
+                </fieldset>
+            </fieldset>
+        </div>
+    </div>
+</script>

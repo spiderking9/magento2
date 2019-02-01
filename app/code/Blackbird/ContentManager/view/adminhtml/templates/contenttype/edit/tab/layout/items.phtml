@@ -1,0 +1,46 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Items
+ */
+?>
+
+<script id="contenttype-content-layout-items" type="text/x-magento-template">
+    <div class="stand column-dropable">
+        <div class="contenttype-layout-items-block column-draggable layout-item" id="layout-item-block" data-id="block">
+            <label class="column-handler"><?= __('CMS Block') ?></label>
+        </div>
+    </div>
+    <div class="stand column-dropable">
+        <div class="contenttype-layout-items-field column-draggable layout-item" id="layout-item-field" data-id="field">
+            <label class="column-handler"><?= __('Field') ?></label>
+        </div>
+    </div>
+    <div class="stand column-dropable">
+        <div class="contenttype-layout-items-group column-draggable layout-item" id="layout-item-group" data-id="group">
+            <label class="column-handler"><?= __('Group') ?></label>
+        </div>
+    </div>
+</script>
+
+
+<div class="admin__field field field-contenttype-layout-items"></div>
+
+<div id="contenttype-layout-items-templates">
+    <?= $block->getItemsTemplatesHtml() ?>
+</div>

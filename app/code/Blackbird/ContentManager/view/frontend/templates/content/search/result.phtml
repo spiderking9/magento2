@@ -1,0 +1,53 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\View\Layout
+ */
+?>
+
+<div class="sub-search-for-content">
+    <h2>Search results in other pages:</h2>
+    <?php if ($block->getResultCount()) : ?>
+        <?= $block->getChildHtml('tagged_content_list_rss_link'); ?>
+        <div class="search results">
+            <?php if ($messages = $block->getNoteMessages()) : ?>
+                <div class="message notice">
+                    <div>
+                        <?php foreach ($messages as $message) : ?>
+                            <?= $message ?><br/>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?= $block->getContentListHtml() ?>
+        </div>
+    <?php else: ?>
+
+        <div class="message notice">
+            <div>
+                <?= ($block->getNoResultText()) ? $block->getNoResultText() : __('Your search returned no results.') ?>
+                <?= $block->getAdditionalHtml() ?>
+                <?php if ($messages = $block->getNoteMessages()) : ?>
+                    <?php foreach ($messages as $message) : ?>
+                        <br/><?= $message ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

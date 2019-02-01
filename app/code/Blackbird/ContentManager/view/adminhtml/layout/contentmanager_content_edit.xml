@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Blackbird_ContentManager::css/content.css"/>
+        <css src="Blackbird_ContentManager::css/html5imageupload.css"/>
+        <css src="Blackbird_ContentManager::css/category-selector.css"/>
+    </head>
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="boolean">true</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tabs" name="contentmanager_content_edit_tabs">
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form" name="contentmanager_content_edit_tab_form"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Url" name="contentmanager_content_edit_tab_url"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Meta" name="contentmanager_content_edit_tab_meta"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Import" name="contentmanager_content_edit_tab_import"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Edit" name="contentmanager_content_edit"/>
+        </referenceContainer>
+    </body>
+</page>

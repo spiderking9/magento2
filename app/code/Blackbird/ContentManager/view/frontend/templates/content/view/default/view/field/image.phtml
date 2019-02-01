@@ -1,0 +1,127 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\View\Field */ ?>
+<?php
+$_content = $block->getContent();
+$_params = $block->getParams();
+$_identifier = $block->getIdentifier();
+
+// Eefault value
+$_labelType = 0;
+$_htmlLabelTag = 'label';
+$_htmlTag = 'div';
+$_htmlId = '';
+$_htmlClass = '';
+$_width = null;
+$_height = null;
+
+// custom_field override
+if (isset($_params['custom_field'])) {
+    $_customField = $_params['custom_field'];
+    $_customFieldId = $_customField->getId();
+    $_label = __($_customField->getTitle());
+    $_width = $_customField->getCropW();
+    $_height = $_customField->getCropH();
+    $_keep_ratio = ($_customField->getKeepAspectRatio() == 1);
+    $_use_cropped = ($_customField->getCrop() == 1);
+    $_link = true;
+}
+
+// Layout override
+if (isset($_params['layout'])) {
+    $_layoutOption = $_params['layout'];
+    $_labelType = $_layoutOption->getLabel();
+    $_htmlLabelTag = $_layoutOption->getHtmlLabelTag();
+    $_htmlTag = $_layoutOption->getHtmlTag();
+    $_htmlId = $_layoutOption->getHtmlId();
+    $_htmlClass = $_layoutOption->getHtmlClass();
+    $_format = unserialize($_layoutOption->getFormat());
+    $_width = $_format['width'];
+    $_height = $_format['height'];
+    $_use_cropped = ($_customField->getCrop() == 1 && $_format['type'] == 'image_cropped');
+    $_link = ($_format['link'] == 1);
+}
+
+// Extra params override
+if (isset($_params['params'])) {
+    $_extraParams = $_params['params'];
+    if (isset($_extraParams['label'])) {
+        $_label = $_extraParams['label'];
+    }
+    if (isset($_extraParams['label_type'])) {
+        $_labelType = $_extraParams['label_type'];
+    }
+    if (isset($_extraParams['html_label_tag'])) {
+        $_htmlLabelTag = $_extraParams['html_label_tag'];
+    }
+    if (isset($_extraParams['html_tag'])) {
+        $_htmlTag = $_extraParams['html_tag'];
+    }
+    if (isset($_extraParams['html_id'])) {
+        $_htmlId = $_extraParams['html_id'];
+    }
+    if (isset($_extraParams['html_class'])) {
+        $_htmlClass = $_extraParams['html_class'];
+    }
+    if (isset($_extraParams['width'])) {
+        $_width = $_extraParams['width'];
+    }
+    if (isset($_extraParams['height'])) {
+        $_height = $_extraParams['height'];
+    }
+    if (isset($_extraParams['type'])) {
+        $_use_cropped = ($_customField->getCrop() == 1 && $_extraParams['type'] == 'image_cropped');
+    }
+    if (isset($_extraParams['link'])) {
+        $_link = ($_extraParams['link'] == 1);
+    }
+    if (isset($_extraParams['has_link'])) {
+        $_hasLink = ($_extraParams['has_link'] == 1 && $_content->getLinkUrl());
+    }
+}
+
+$_image_url = $_content->getImage($_identifier, $_width, $_height, $_keep_ratio, $_use_cropped);
+$_image_extra_url = $_content->getData($_identifier.'_url');
+?>
+<?php if ($_htmlTag) : ?><<?= $_htmlTag; ?> class="ct-field ct-field-<?= $block->getType(); ?><?= $_htmlClass; ?>" id="<?php if ($_htmlId) : ?><?= $_htmlId; ?><?php else: ?>ct-field-<?= $_customFieldId; ?><?php endif; ?>"><?php endif; ?>
+<?php /*Label over*/ ?>
+<?php if ($_labelType == 1) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+
+<?php /*Value wrapper start*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?>
+<div class="ct-value"><?php endif; ?>
+
+    <?php /*Label inline*/ ?>
+    <?php if ($_labelType == 3) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+
+<?php /*Value*/ ?>
+<?php if (isset($_hasLink) && $_hasLink) : ?><a href="<?= $_image_extra_url ?: $_content->getLinkUrl(); ?>"
+                                                class="ct-link"
+                                                title="<?= $block->escapeHtml($_content->getData($_identifier.'_titl')); ?>"><?php endif; ?>
+    <?php if ((!isset($_hasLink) || !$_hasLink) && $_link) : ?><a href="<?= $_image_extra_url ?: $_image_url; ?>"
+                                                                  target="_blank" class="ct-image-link"
+                                                                  title="<?= $block->escapeHtml($_content->getData($_identifier.'_titl')); ?>"><?php endif; ?>
+        <img src="<?= $_image_url; ?>" class="ct-image"
+             alt="<?= $block->escapeHtml($_content->getData($_identifier.'_alt')); ?>"/>
+        <?php if ((!isset($_hasLink) || !$_hasLink) && $_link) : ?></a><?php endif; ?>
+    <?php if (isset($_hasLink) && $_hasLink) : ?></a><?php endif; ?>
+
+<?php /*Value wrapper end*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?></div><?php endif; ?>
+<?php /*Label below*/ ?>
+<?php if ($_labelType == 2) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+<?php if ($_htmlTag) : ?></<?= $_htmlTag; ?>><?php endif; ?>

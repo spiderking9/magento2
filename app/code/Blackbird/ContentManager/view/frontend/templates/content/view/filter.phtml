@@ -1,0 +1,97 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/** @see \Blackbird\ContentManager\Block\Filter */
+/** @var $block \Blackbird\ContentManager\Block\Filter */
+?>
+<div class="block filter block-filter block-ct-filter" id="content-filter-block"
+     data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+    <div class="block-title filter-title">
+        <span><?= $block->escapeHtml($block->getTitle()) ?></span>
+    </div>
+    <div class="block-content filter-content">
+        <?php if ($block->getFilters() && $block->getFilters()->count()): ?>
+            <?php if ($block->hasActiveFilters()): ?>
+                <div class="filter-current">
+                    <div class="filter-current">
+                        <strong class="block-subtitle filter-current-subtitle">
+                            <?= $block->escapeHtml(__('Now Filtering by')) ?>
+                        </strong>
+                        <ol class="items">
+                            <?php foreach ($block->getActiveFilters() as $filter): ?>
+                                <li class="item">
+                                    <span class="filter-label"><?= $block->escapeHtml($filter->getTitle()) ?></span>
+                                    <span class="filter-value"><?= $block->escapeHtml($filter->getValue()) ?></span>
+                                    <a class="action remove"
+                                       href="<?= $block->getRemoveUrl($filter->getIdentifier()) ?>"
+                                       title="<?= __('Remove %1', $filter->getTitle()) ?>">
+                                        <span><?= $block->escapeHtml(__('Remove This Item')) ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                </div>
+                <div class="block-actions filter-actions">
+                    <a href="<?= $block->getClearUrl() ?>" class="action clear filter-clear">
+                        <span><?= $block->escapeHtml(__('Clear All')) ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">
+                <?= $block->escapeHtml($block->getSubtitle()) ?>
+            </strong>
+            <div class="filter-options" id="narrow-by-list" data-role="content"
+                 data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+                <?php foreach ($block->getFilters() as $filter): ?>
+                    <div data-role="collapsible" class="filter-options-item">
+                        <div data-role="title" class="filter-options-title">
+                            <?= $block->escapeHtml($filter->getTitle()) ?>
+                        </div>
+                        <div data-role="content" class="filter-options-content">
+                            <ol class="items">
+                                <?php foreach ($filter->getAllOptions() as $option): ?>
+                                    <li class="item">
+                                        <a href="<?= $block->getFilterUrl($filter->getIdentifier(),
+                                            $option['value']) ?>"
+                                            <?php if ($block->isFilterActive($filter->getIdentifier(), $option['value'])): ?> class="current"<?php endif; ?>>
+                                            <?= $block->escapeHtml($option['label']) ?>
+                                            <span class="count">
+                                                <?= $block->getResultFilterCount($filter->getIdentifier(), $option['value']) ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?= $block->escapeHtml(__('We can\'t find filters matching the selection.')) ?></span>
+            </div>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    $('#content-filter-block').addClass('filter-no-options');
+                });
+            </script>
+        <?php endif; ?>
+    </div>
+</div>

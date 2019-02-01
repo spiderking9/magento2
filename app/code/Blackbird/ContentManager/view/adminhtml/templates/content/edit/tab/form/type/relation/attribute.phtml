@@ -1,0 +1,40 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\Relation\Attribute */ ?>
+<?php
+$_element = $block->getElement();
+$_value = explode(',', $_element->getEscapedValue());
+?>
+<div
+        class="admin__field field <?= $block->getRelationClass() ?> field-<?= $_element->getName() ?> <?= $_element->getRequired() != '0'
+            ? 'required _required' : '' ?> <?= !empty($_element->getNote()) ? 'with-note' : '' ?>"
+        data-ui-id="contentmanager-content-edit-form-fieldset-element-form-field-<?= $_element->getHtmlId() ?>">
+    <?= $_element->getLabelHtml() ?>
+    <div class="admin__field-control control">
+        <select name="<?= $block->getHtmlName() ?>" class="<?= $block->getHtmlClass() ?>"
+                title="<?= $_element->getTitle() ?>" <?= $block->getHtmlAdditionalAttributes() ?>>
+            <?php foreach ($block->getAllOptions() as $option) : ?>
+                <option value="<?= $option['value'] ?>" <?= in_array($option['value'], $_value) ? 'selected="selected"'
+                    : '' ?> ><?= $option['label'] ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <?php if (!empty($_element->getNote())) : ?>
+            <div class="note" id="<?= $_element->getHtmlId() ?>-note"><?= $_element->getNote() ?></div>
+        <?php endif; ?>
+    </div>
+</div>

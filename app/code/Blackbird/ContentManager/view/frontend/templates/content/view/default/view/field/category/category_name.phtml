@@ -1,0 +1,35 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\View\Field */ ?>
+<?php
+$_identifier = $block->getIdentifier();
+$_content = $block->getContent();
+
+$_categoryCollection = $block->getCategoryCollection(['name']);
+?>
+<?php if ($_categoryCollection->count()) : ?>
+    <ul class="ct-category-list" id="ct-category-list-<?= $block->getIdentifier(); ?>">
+        <?php foreach ($_categoryCollection as $_category) : ?>
+            <li class="item">
+                <?php $_categoryNameStripped = $block->stripTags($_category->getName(), null, true); ?>
+                <p class="category-name"><a href="<?= $_category->getUrl() ?>"
+                                            title="<?= $_categoryNameStripped; ?>"><?= $_category->getName(); ?></a>
+                </p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

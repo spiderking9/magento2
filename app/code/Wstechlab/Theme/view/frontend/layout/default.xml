@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.container">
+            <container name="header.stores.wrapper" htmlClass="stores wrapper" htmlTag="div" before="header.panel">
+                <block class="Wstechlab\Theme\Block\StoreSwitcher" name="store_switch_dropdown" as="store_switch_dropdown" 
+                        template="Wstechlab_Theme::html/header/store_switcher.phtml" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>

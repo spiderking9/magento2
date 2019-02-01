@@ -1,0 +1,79 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Layouts
+ */
+?>
+<?php
+$_element = $block->getElement();
+$contentType = $block->getContentType();
+
+// Preview image
+$elemValue = ($_element->getEscapedValue());
+$layoutId = $elemValue ? $elemValue : 0;
+$srcImage = $block->getViewFileUrl('Blackbird_ContentManager/images/contenttype/layout/layout_'.$layoutId.'.png');
+$contentTypeIdentifier = (!empty($block->getContentTypeIdentifier())) ? $block->getContentTypeIdentifier()
+    : '&lt;contenttype_identifier&gt;';
+?>
+
+<div class="admin__field field field-content_layout with-note"
+     data-ui-id="contentmanager-contenttype-edit-form-fieldset-element-form-field-content-layout">
+    <?= $_element->getLabelHtml() ?>
+    <div class="admin__field-control control">
+        <?= $block->getTypeSelectHtml() ?>
+        <div class="note" id="content_layout-note"><?= $_element->getNote() ?></div>
+        <div class="preview" id="content_layout-preview">
+            <img id="content_layout-img" src="<?= $srcImage ?>" alt="<?= $layoutId ?>"/>
+        </div>
+        <div class="warning" id="content_layout-warning">
+            <p><?= __('You are using customizable .phtml template file for your layout.') ?><br/>
+                <?= __('The extension let you override the default view.phtml file by one of the following file name :') ?>
+            </p>
+            <ul>
+                <li>/app/design/frontend/&lt;Vendor&gt;/&lt;Theme&gt;/Blackbird_ContentManager/templates/content/view/default/list.phtml</li>
+                <li>
+                    /app/design/frontend/&lt;Vendor&gt;/&lt;Theme&gt;/Blackbird_ContentManager/templates/content/view/<?= $contentTypeIdentifier ?>
+                    /list.phtml
+                </li>
+                <li>
+                    /app/design/frontend/&lt;Vendor&gt;/&lt;Theme&gt;/Blackbird_ContentManager/templates/content/view/<?= $contentTypeIdentifier ?>
+                    /list-ID.phtml
+                    <small>(replace ID by your content list ID)</small>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<?= $block->getContentLayoutColumnsTemplateHtml() ?>
+
+<script>
+    require([
+        "jquery",
+        "Blackbird_ContentManager/js/contenttype-layout"
+    ], function ($) {
+        var contentSet = $('[data-ui-id=contentmanager-content-edit-tabs-tab-content-layout]');
+        contentSet.contenttypeLayout();
+
+        // adding data to templates
+        <?php /** @var $_value \Magento\Framework\Object */ ?>
+        <?php foreach($block->getItemValues() as $_value) : ?>
+            contentSet.contenttypeLayout('addItem', <?= $_value->toJson() ?>);
+        <?php endforeach; ?>
+    });
+</script>

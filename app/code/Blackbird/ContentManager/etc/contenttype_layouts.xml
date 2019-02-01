@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Blackbird_ContentManager:etc/contenttype_layouts.xsd">
+    <!-- Custom layout -->
+    <layouts id="-1" label="Custom">
+        <layout id="0" label="Use customized .phtml template file (for experimented user only)"/>
+    </layouts>
+    <!-- 1 Column -->
+    <layouts id="1" label="1 Column">
+        <layout id="10" label="1 simple column">
+            <column id="1" class="main"/>
+        </layout>
+        <layout id="11" label="1 column with top and bottom areas">
+            <column id="7" class="top"/>
+            <column id="1" class="main"/>
+            <column id="9" class="bottom"/>
+        </layout>
+        <layout id="12" label="1 column separated by a middle area, with top and bottom areas">
+            <column id="7" class="top"/>
+            <column id="1" class="main-half"/>
+            <column id="8" class="middle"/>
+            <column id="2" class="main-half"/>
+            <column id="9" class="bottom"/>
+        </layout>
+    </layouts>
+    <!-- 2 Columns -->
+    <layouts id="2" label="2 Columns">
+        <layout id="20" label="2 simple columns">
+            <column id="1" class="main" width="50"/>
+            <column id="2" class="main" width="50" float="right"/>
+        </layout>
+        <layout id="21" label="2 simple columns with top and bottom areas">
+            <column id="7" class="top"/>
+            <column id="1" class="main" width="50"/>
+            <column id="2" class="main" width="50" float="right"/>
+            <column id="9" class="bottom"/>
+        </layout>
+        <layout id="22" label="2 columns separated by a middle area, with top and bottom areas">
+            <column id="7" class="top"/>
+            <column id="1" class="main-half" width="50"/>
+            <column id="2" class="main-half" width="50" float="right"/>
+            <column id="8" class="middle"/>
+            <column id="3" class="main-half" width="50"/>
+            <column id="4" class="main-half" width="50" float="right"/>
+            <column id="9" class="bottom"/>
+        </layout>
+    </layouts>
+    <!-- 3 Columns -->
+    <layouts id="3" label="3 Columns">
+        <layout id="30" label="3 simple columns (25% | 50% | 25%)">
+            <column id="1" class="main" width="25"/>
+            <column id="2" class="main" width="50-mid"/>
+            <column id="3" class="main" width="25"/>
+        </layout>
+        <layout id="31" label="3 simple columns (33% | 33% | 33%)">
+            <column id="1" class="main" width="33"/>
+            <column id="2" class="main" width="33-mid"/>
+            <column id="3" class="main" width="33"/>
+        </layout>
+        <layout id="32" label="3 simple columns with top and bottom areas (25% | 50% | 25%)">
+            <column id="7" class="top"/>
+            <column id="1" class="main" width="25"/>
+            <column id="2" class="main" width="50-mid"/>
+            <column id="3" class="main" width="25"/>
+            <column id="9" class="bottom"/>
+        </layout>
+        <layout id="33" label="3 simple columns with top and bottom areas (33% | 33% | 33%)">
+            <column id="7" class="top"/>
+            <column id="1" class="main" width="33"/>
+            <column id="2" class="main" width="33-mid"/>
+            <column id="3" class="main" width="33"/>
+            <column id="9" class="bottom"/>
+        </layout>
+        <layout id="34" label="3 columns separated by a middle area, with top and bottom areas (25% | 50% | 25%)">
+            <column id="7" class="top"/>
+            <column id="1" class="main-half" width="25"/>
+            <column id="2" class="main-half" width="50-mid"/>
+            <column id="3" class="main-half" width="25"/>
+            <column id="8" class="middle"/>
+            <column id="4" class="main-half" width="25"/>
+            <column id="5" class="main-half" width="50-mid"/>
+            <column id="6" class="main-half" width="25"/>
+            <column id="9" class="bottom"/>
+        </layout>
+        <layout id="35" label="3 columns separated by a middle area, with top and bottom areas (33% | 33% | 33%)">
+            <column id="7" class="top"/>
+            <column id="1" class="main-half" width="33"/>
+            <column id="2" class="main-half" width="33-mid"/>
+            <column id="3" class="main-half" width="33"/>
+            <column id="8" class="middle"/>
+            <column id="4" class="main-half" width="33"/>
+            <column id="5" class="main-half" width="33-mid"/>
+            <column id="6" class="main-half" width="33"/>
+            <column id="9" class="bottom"/>
+        </layout>
+    </layouts>
+</config>

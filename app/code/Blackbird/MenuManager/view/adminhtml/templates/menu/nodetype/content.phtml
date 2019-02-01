@@ -1,0 +1,75 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php /** @var $block \Blackbird\MenuManager\Block\Adminhtml\NodeType\Content */ ?>
+
+<div class="admin__field field field-block-content" data-mage-init='{"menuManagerContent":{"type":"content"}}'>
+    <div class="admin__field field field-content" data-ui-id="content-chooser">
+        <label class="label admin__field-label" for="content_id">Content</label>
+        <div class="admin__field-control control">
+            <input class="input-text admin__control-text" id="content_id" type="text" name="content-field" data-mage-init='{"menuManagerEditorRename":{"type":"entity_id"}}'/>
+            <?= $block->getOpenChooserButtonHtml() ?>
+            <?= $block->getApplyButtonHtml() ?>
+        </div>
+    </div>
+
+    <div class="admin__field field field-url_path">
+        <label class="label admin__field-label" for="specific-url">Specific URL</label>
+        <div class="admin__field-control control">
+            <input class="input-text admin__control-text" id="specific-url" type="url" data-mage-init='{"menuManagerEditorRename":{"type":"url_path"}}'/>
+        </div>
+    </div>
+
+    <div class="admin__field field field-canonical">
+        <label class="label admin__field-label" for="menumanager-content-is_canonical">Default URL for this content</label>
+        <div class="admin__field-control control">
+            <select
+                id="menumanager-content-is_canonical"
+                class="input-select admin__control-select"
+                data-mage-init='{"menuManagerEditorRename":{"type":"canonical"}}'>
+                <?php foreach($block->getIsCanonical() as $item):?>
+                <option value="<?php echo $item['value']; ?>"><?php echo $item['label'];?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "Blackbird_MenuManager/js/content"
+    ], function(jQuery){
+        jQuery(function ($) {
+            var contentSet = $('[data-ui-id=content-chooser]');
+            contentSet.contentEdit(<?= $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+                [
+                    'formKey' => $block->getFormKey(),
+                    'fieldId' => 'content_id',
+                    'fieldName' => 'content-field',
+                    'fieldType' => 'content',
+                    'urlSource' => $block->getUrlSource(),
+                ]
+            )?>);
+        });
+    });
+</script>
+<script>
+    require([
+        "Blackbird_MenuManager/js/chooser",
+        "prototype"
+    ], function(RelationChooserForm){
+        window.content_id = new RelationChooserForm('content_id');
+    });
+</script>

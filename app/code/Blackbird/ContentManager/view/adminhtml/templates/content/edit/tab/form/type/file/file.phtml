@@ -1,0 +1,64 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\File\File */ ?>
+<?php
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note" id="'.$element->getId().'-note">'.$element->getNote().'</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$fieldId = ($element->getHtmlContainerId()) ? ' id="'.$element->getHtmlContainerId().'"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$fieldAttributes = $fieldId.' class="'.$fieldClass.'" '.$block->getUiId('form-field',
+        $element->getId()).($element->getFieldExtraAttributes() ? ' '.$element->getFieldExtraAttributes() : '');
+
+
+$isRepeater = $element->getIsInRepeater(); // If File comes from repeater field
+$deleteInputName = 'delete[]';
+$deleteName = $element->getName();
+
+/*If file comes from a repeater field*/
+if ($isRepeater) {
+    $deleteInputName = $element->getDeleteInputName();
+    $deleteName = $element->getDeleteName();
+}
+
+?>
+<div<?= $fieldAttributes ?>>
+    <?= $element->getLabelHtml() ?>
+    <div class="admin__field-control control">
+        <div class="field-file-file">
+            <?php if (!empty($element->getEscapedValue())) : ?>
+                <input type="checkbox" name="<?= $deleteInputName ?>" id="<?= $element->getId() ?>-delete"
+                       value="<?= $deleteName ?>"/>
+                <label for="<?= $element->getId() ?>-delete"><?= __('Delete file') ?></label>
+            <?php endif; ?>
+            <?= $element->getElementHtml() ?>
+            <p>
+                <input type="hidden" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>"
+                       value="<?= $element->getEscapedValue() ?>"/>
+                <a href="<?= $block->getFileUrl() ?>" target="_blank"><?= $element->getEscapedValue() ?></a>
+            </p>
+
+            <?= $element->getAfterElementHtml() ?>
+        </div>
+        <?= $note ?>
+    </div>
+</div>

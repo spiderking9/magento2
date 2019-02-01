@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Blackbird_ContentManager::css/store-flag.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Flag\Edit\Tabs" name="contentmanager_flag_edit_tabs">
+                <!-- Define blocks -->
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Flag\Edit\Tab\Form" name="contentmanager_flag_edit_tab_form"/>
+                <!-- Add tabs -->
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">general</argument>
+                    <argument name="block" xsi:type="string">contentmanager_flag_edit_tab_form</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Flag\Edit" name="contentmanager_flag_edit"/>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Blackbird_ContentManager::flag/flag-js.phtml" name="flag.js"/>
+        </referenceContainer>
+    </body>
+</page>

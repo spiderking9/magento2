@@ -1,0 +1,96 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout\Templates\Item\Field\Date */ ?>
+<script id="contenttype-content-layout-item-field-date" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-date">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-date">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-short-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_short"
+            <% if (data.format == 'date_short') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-short-format">
+                <?= __('Short date format') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-medium-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_medium"
+            <% if ((data.format == 'date_medium') || (data.format != 'date_short' && data.format != 'date_long')) {
+            %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-medium-format">
+                <?= __('Medium date format') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-long-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_long"
+            <% if (data.format == 'date_long') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-long-format">
+                <?= __('Long date format') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>
+
+<script id="contenttype-content-layout-item-field-date_time" type="text/x-magento-template">
+    <div class="field id=" contenttype-content-layout-item-field-datetime">
+    <label class="label"><?= __('Format') ?></label>
+    <div class="control">
+        <div class="contenttype-format format-date_time">
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-short-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_time_short"
+            <% if (data.format == 'date_time_short') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-format">
+                <?= __('Short datetime format') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-medium-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_time_medium"
+            <% if ((data.format == 'date_time_medium') || (data.format != 'date_time_short' && data.format !=
+            'date_time_long')) { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-medium-format">
+                <?= __('Medium datetime format') ?>
+            </label>
+            <br/>
+            <input type="radio" class="checkbox layout_field_format required-entry _required"
+                   id="layout-item-field-<%- data.id %>-long-format"
+                   name="layout[item][field][<%- data.id %>][format]"
+                   value="date_time_long"
+            <% if (data.format == 'date_time_long') { %>checked="checked"<% } %>
+            />
+            <label for="layout-item-field-<%- data.id %>-long-format">
+                <?= __('Long datetime format') ?>
+            </label>
+        </div>
+    </div>
+    </div>
+</script>

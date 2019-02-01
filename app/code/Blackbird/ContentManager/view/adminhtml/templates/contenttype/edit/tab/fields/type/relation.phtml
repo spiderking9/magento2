@@ -1,0 +1,66 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Relation */ ?>
+<script id="custom-field-relation-type-template" type="text/x-magento-template">
+    <div
+            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+            class="fieldset">
+        <% if (data.type !== 'product' && data.type !== 'category') { %>
+        <table class="data-table">
+            <thead>
+            <% if (data.type === 'content') { %>
+            <tr>
+                <th><?= __('Content Type') ?></th>
+            </tr>
+            <% } else if (data.type === 'attribute') { %>
+            <tr>
+                <th><?= __('Attribute') ?></th>
+                <th><?= __('Multi-select') ?></th>
+            </tr>
+            <% } %>
+            </thead>
+            <% if (data.type === 'content') { %>
+            <tr>
+                <td>
+                    <?= $block->getContentTypesSelectHtml() ?>
+                    <p class="note"><?= __('Limit the choice for this content type') ?></p>
+                </td>
+            </tr>
+            <% } else if (data.type === 'attribute') { %>
+            <tr>
+                <td>
+                    <?= $block->getAttributesSelectHtml() ?>
+                    <p class="note"><?= __('Limit the choice for this attribute fields') ?></p>
+                </td>
+                <td>
+                    <select class="select"
+                            id="<?= $block->getFieldsetId().'_<%- data.id %>_'.$block->getFieldId().'_<%- data.field_id %>_attribute_max_characters' ?>"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][max_characters]">
+                        <option value="0"><?= __('No') ?></option>
+                        <option value="1"><?= __('Yes') ?></option>
+                    </select>
+                </td>
+            </tr>
+            <% } else if (data.type === 'customer') { %>
+            <tr>
+                <!-- todo add extra params -->
+            </tr>
+            <% } %>
+        </table>
+        <% } %>
+    </div>
+</script>

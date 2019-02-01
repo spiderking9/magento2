@@ -1,0 +1,66 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\View\Group\Footer
+ */
+?>
+<?php
+$_content = $block->getContent();
+$_params = $block->getParams();
+$_identifier = $block->getIdentifier();
+$_type = $block->getType();
+$_layoutGroup = $block->getLayoutGroup();
+
+// Default value
+$_labelType = $_layoutGroup->getLabel();
+$_htmlLabelTag = $_layoutGroup->getHtmlLabelTag();
+$_htmlTag = $_layoutGroup->getHtmlTag();
+$_htmlId = $_layoutGroup->getHtmlId();
+$_htmlClass = $_layoutGroup->getHtmlClass();
+$_label = $_layoutGroup->getHtmlName();
+
+// Extra params override
+if (isset($_params['params'])) {
+    $_extraParams = $_params['params'];
+    if (isset($_extraParams['label'])) {
+        $_label = $_extraParams['label'];
+    }
+    if (isset($_extraParams['label_type'])) {
+        $_labelType = $_extraParams['label_type'];
+    }
+    if (isset($_extraParams['html_label_tag'])) {
+        $_htmlLabelTag = $_extraParams['html_label_tag'];
+    }
+    if (isset($_extraParams['html_tag'])) {
+        $_htmlTag = $_extraParams['html_tag'];
+    }
+    if (isset($_extraParams['html_id'])) {
+        $_htmlId = $_extraParams['html_id'];
+    }
+    if (isset($_extraParams['html_class'])) {
+        $_htmlClass = $_extraParams['html_class'];
+    }
+}
+?>
+
+<?php /*Value wrapper end*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?></div><?php endif; ?>
+
+<?php /*Label below*/ ?>
+<?php if ($_labelType == 2) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+<?php if ($_htmlTag) : ?></<?= $_htmlTag; ?>><?php endif; ?>

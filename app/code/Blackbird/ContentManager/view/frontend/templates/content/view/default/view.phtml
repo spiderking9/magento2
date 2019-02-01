@@ -1,0 +1,67 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\View
+ */
+?>
+<?php
+/*
+ * 
+ * 
+ * AVAILABLE METHODS
+ * 
+ * Get all raw values as an array
+ * $content->getData();
+ * 
+ * Get a specific value by his field identifier
+ * $content->getData('field_identifier');
+ * $content->getFieldIdentifier();
+ * $content->getAttributeText('field_identifier');
+ * 
+ * Get content type model
+ * $content->getContentType();
+ * 
+ * Get image URL for an image field type.
+ * $content->getImage($attributeName, $width, $height, $keepRatio, $cropped = false);
+ * 
+ * Get file absolute URL, for a file field typ
+ * $content->getFile($field_identifier);
+ * 
+ * Get content url
+ * $content->getLinkUrl();
+ * 
+ * Render a field in HTML
+ * $content->render($element, $params);
+ * 
+ * See the complete documentation and more examples at:
+ * http://www.advancedcontentmanager.com/documentation/
+ * 
+ */
+?>
+<?php
+/** @var \Blackbird\ContentManager\Model\Content $content */
+$content = $block->getContent();
+/** @var \Blackbird\ContentManager\Model\ContentType $contentType */
+$contentType = $content->getContentType();
+?>
+<div class="block widget ct-view ct-view-<?= $contentType->getIdentifier(); ?>"
+     id="ct-view-<?= $content->getId(); ?>">
+    <div class="block-content">
+        <?= $block->getContentHtml(); ?>
+    </div>
+</div>

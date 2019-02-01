@@ -1,0 +1,79 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category    Blackbird
+ * @package        Blackbird_ContentManager
+ * @copyright    Copyright (c) 2014 Blackbird Content Manager (https://black.bird.eu)
+ * @author        Blackbird Team
+ * @license        https://www.advancedcontentmanager.com/license/
+ * @version        1.6.2
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\View\Block
+ */
+?>
+<?php
+$_content = $block->getContent();
+$_params = $block->getParams();
+$_identifier = $block->getIdentifier();
+$_type = $block->getType();
+$_layoutBlock = $block->getLayoutBlock();
+$cmsBlock = $block->getCmsBlock();
+$cmsBlockModel = $block->getCmsBlockModel($cmsBlock->getBlockId());
+$cmsBlockHtml = $block->getCmsBlockHtml();
+
+// Default value
+$_labelType = $_layoutBlock->getLabel();
+$_htmlLabelTag = $_layoutBlock->getHtmlLabelTag();
+$_htmlTag = $_layoutBlock->getHtmlTag();
+$_htmlId = $_layoutBlock->getHtmlId();
+$_htmlClass = $_layoutBlock->getHtmlClass();
+$_label = $cmsBlockModel->getTitle();
+
+// Extra params override
+if (isset($_params['params'])) {
+    $_extraParams = $_params['params'];
+    if (isset($_extraParams['label'])) {
+        $_label = $_extraParams['label'];
+    }
+    if (isset($_extraParams['label_type'])) {
+        $_labelType = $_extraParams['label_type'];
+    }
+    if (isset($_extraParams['html_label_tag'])) {
+        $_htmlLabelTag = $_extraParams['html_label_tag'];
+    }
+    if (isset($_extraParams['html_tag'])) {
+        $_htmlTag = $_extraParams['html_tag'];
+    }
+    if (isset($_extraParams['html_id'])) {
+        $_htmlId = $_extraParams['html_id'];
+    }
+    if (isset($_extraParams['html_class'])) {
+        $_htmlClass = $_extraParams['html_class'];
+    }
+}
+?>
+<?php if ($_htmlTag) : ?><<?= $_htmlTag; ?> class="ct-block <?= $_htmlClass; ?>" id="<?php if ($_htmlId) : ?><?= $_htmlId; ?><?php else: ?>ct-block-<?= $cmsBlock->getBlockId(); ?><?php endif; ?>"><?php endif; ?>
+<?php /*Label over*/ ?>
+<?php if ($_labelType == 1) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+
+<?php /*Value wrapper start*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?><div class="ct-block-value"><?php endif; ?>
+    <?php /*Label inline*/ ?>
+    <?php if ($_labelType == 3) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+<?php /*Value*/ ?>
+<?= $cmsBlockHtml; ?>
+
+<?php /*Value wrapper end*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?></div><?php endif; ?>
+<?php /*Label below*/ ?>
+<?php if ($_labelType == 2) : ?><?php if ($_htmlLabelTag) : ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag) : ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+<?php if ($_htmlTag) : ?></<?= $_htmlTag; ?>><?php endif; ?>

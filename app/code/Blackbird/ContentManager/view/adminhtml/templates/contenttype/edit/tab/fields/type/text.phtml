@@ -1,0 +1,66 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Text */ ?>
+<script id="custom-field-text-type-template" type="text/x-magento-template">
+    <div
+            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+            class="fieldset">
+        <% if (data.type !== 'password') { %>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th><?= __('Max Characters') ?></th>
+                <th><?= __('Default Value') ?></th>
+                <% if (data.type === 'area') { %>
+                <th><?= __('WYSIWYG') ?></th>
+                <% } %>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    <input
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][max_characters]"
+                            class="input-text validate-zero-or-greater"
+                            type="text" value="<%- data.max_characters %>"
+                    >
+                    <div
+                            class="note"><?= __('Keep field <strong>empty</strong> or to <strong>0</strong> for no limitation.') ?></div>
+                </td>
+                <td>
+                    <input
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][default_value]"
+                            class="input-text"
+                            type="text" value="<%- data.default_value %>"
+                    >
+                </td>
+                <% if (data.type === 'area') { %>
+                <td>
+                    <div class="control">
+                        <select class="select"
+                                id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_wysiwyg_editor"
+                                name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][wysiwyg_editor]">
+                            <option value="0"><?= __('No') ?></option>
+                            <option value="1"><?= __('Yes') ?></option>
+                        </select>
+                    </div>
+                </td>
+                <% } %>
+            </tr>
+        </table>
+        <% } %>
+    </div>
+</script>

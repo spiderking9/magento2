@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mageplaza\LayeredNavigationPro\Block\Type\OptionList" type="Wstechlab\LayeredNavigation\Block\Type\OptionList" />
+    <type name="\Mageplaza\LayeredNavigationUltimate\Controller\ProductsPage\View">
+        <plugin name="Wstechlab_Plugin_Category_ProductPage_View_Controller" type="Wstechlab\LayeredNavigation\Plugin\Controller\ProductsPage\View" />
+    </type>
+</config>

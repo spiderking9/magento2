@@ -1,0 +1,86 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Select */ ?>
+<script id="custom-field-select-type-template" type="text/x-magento-template">
+    <div
+            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+            class="fieldset">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th class="col-draggable">&nbsp;</th>
+                <th class="required"><?= __('Title') ?></th>
+                <th class=""><?= __('Value') ?></th>
+                <th class=""><?= __('Default') ?></th>
+                <th class="col-actions">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody
+                    id="contenttype_fieldset_<%- data.id %>_field_<%- data.field_id %>_type_<%- data.group %>_row"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3"><?= $block->getAddButtonHtml() ?></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</script>
+<script id="custom-field-select-type-row-template" type="text/x-magento-template">
+    <tr id="contenttype_fieldset_<%- data.id %>_field_<%- data.field_id %>_<%- data.group %>_<%- data.select_id %>">
+        <input
+                name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][option_type_id]"
+                type="hidden" value="<%- data.select_uid %>">
+        <input
+                id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<%- data.group %>_<%- data.select_id %>_is_delete"
+                name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][is_delete]"
+                type="hidden" value=""/>
+        <td class="col-draggable">
+            <div data-role="draggable-handle" class="draggable-handle" title="<?= __('Sort Rows'); ?>"></div>
+            <input
+                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][sort_order]"
+                    type="hidden" value="<%- data.sort_order %>">
+        </td>
+        <td>
+            <input
+                    id="contenttype_fieldset_<%- data.id %>_field_<%- data.field_id %>_select_<%- data.select_id %>_title"
+                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][title]"
+                    class="required-entry input-text"
+                    type="text" value="<%- data.title %>"
+            >
+        </td>
+        <td>
+            <input
+                    id="contenttype_fieldset_<%- data.id %>_field_<%- data.field_id %>_select_<%- data.select_id %>_value"
+                    name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][value]"
+                    class="input-text validate-no-html-tags"
+                    type="text" value="<%- data.value %>"
+            >
+        </td>
+        <td>
+            <div class="control">
+                <select
+                        id="contenttype_fieldset_<%- data.id %>_field_<%- data.field_id %>_select_<%- data.select_id %>_default"
+                        name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][<%- data.group %>][<%- data.select_id %>][default]"
+                >
+                    <option value="0"><?= __('No'); ?></option>
+                    <option value="1"><?= __('Yes'); ?></option>
+                </select>
+            </div>
+        </td>
+        <td class="col-actions col-delete"><?= $block->getDeleteButtonHtml() ?></td>
+    </tr>
+</script>

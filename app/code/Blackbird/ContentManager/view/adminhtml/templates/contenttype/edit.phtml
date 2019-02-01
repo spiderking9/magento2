@@ -1,0 +1,86 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit
+ */
+?>
+<?php /* @escapeNotVerified */
+echo $block->getFormInitScripts() ?>
+<?php if ($block->getButtonsHtml('header')) : ?>
+    <div class="page-form-actions" <?php /* @escapeNotVerified */
+    echo $block->getUiId('content-header') ?>><?php echo $block->getButtonsHtml('header') ?></div>
+<?php endif; ?>
+<?php echo $block->getFormHtml() ?>
+<?php if ($block->hasFooterButtons()) : ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $block->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+<script>
+    require([
+        'jquery',
+        'mage/mage',
+        'mage/backend/form',
+        'mage/backend/validation'
+    ], function ($) {
+        var editForm = $('#edit_form');
+
+        editForm.mage('form', {
+            handlersData: {
+                save: {},
+                saveAndContinueEdit: {
+                    action: {
+                        args: {back: 'edit'}
+                    }
+                },
+                saveAndNew: {
+                    action: {
+                        args: {back: 'new'}
+                    }
+                },
+                saveAndExport: {
+                    action: {
+                        args: {back: 'export'}
+                    }
+                },
+                saveAndClose: {
+                    action: {
+                        args: {back: 'back'}
+                    }
+                }
+            }
+        });
+
+        editForm.form().validation({
+            validationUrl: '<?php /* @escapeNotVerified */ echo $block->getValidationUrl() ?>',
+            highlight: function (element) {
+                var detailsElement = $(element).closest('details');
+                if (detailsElement.length && detailsElement.is('.details')) {
+                    var summaryElement = detailsElement.find('summary');
+                    if (summaryElement.length && summaryElement.attr('aria-expanded') === "false") {
+                        summaryElement.trigger('click');
+                    }
+                }
+                $(element).trigger('highlight.validate');
+            }
+        });
+
+    });
+</script>
+<?php /* @escapeNotVerified */
+echo $block->getFormScripts() ?>

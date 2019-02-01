@@ -1,0 +1,107 @@
+@color__dark: #1f1f1f;
+@color__light: #919191;
+
+
+& when (@media-common = true) {
+
+  //   --------- Instagram widget ------------
+
+  .instagram-widget-container {
+    text-align: center;
+    background: @color__dark;
+    padding-top: 50px;
+    padding-bottom: 100px;
+
+    #bb-insta-title {
+      padding-bottom: 20px;
+      font-size: 18px;
+      display: block;
+      color: @color__light;
+    }
+
+    #bb-insta-stream {
+      padding: 0;
+      li {
+        list-style: none;
+        position: relative;
+        padding: 15px;
+        width: 50%;
+        float: left;
+        a {
+          cursor: pointer;
+          &:hover {
+            img {
+              opacity: 0.7;
+            }
+          }
+        }
+        &.like-hover {
+          position: relative;
+          .mask {
+            transition: all 0.2s ease-in-out;
+            overflow: hidden;
+            color: #fff;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            bottom: 20px;
+            right: 15px;
+            span {
+              transition: all 0.2s ease-in-out;
+              font-size: 25px;
+              position: absolute;
+              top: -200px;
+              &:before {
+                background: url("../Bitbull_InstagramWidget/images/heart.png") no-repeat;
+                background-size: 20px;
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                left: -30px;
+                transform: translate(0,-50%);
+                -webkit-transform: translate(0,-50%);
+                top: 50%;
+              }
+            }
+          }
+          &:hover {
+            .mask {
+              display: block;
+              background: rgba(0,0,0,0.9);
+              span {
+                transition-delay: 0.4s;
+                opacity: 1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                -webkit-transform: translate(-50%,-50%);
+              }
+            }
+          }
+        }
+      }
+      &:after {
+        content: ' ';
+        clear: both;
+        display: block;
+      }
+    }
+  }
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+  .instagram-widget-container {
+    #bb-insta-title {
+      font-size: 30px;
+    }
+    #bb-insta-stream {
+      li {
+        width: 25%;
+      }
+    }
+  }
+}

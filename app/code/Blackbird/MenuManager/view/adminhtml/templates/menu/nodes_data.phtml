@@ -1,0 +1,63 @@
+<?php /** @var $block \Blackbird\MenuManager\Block\Adminhtml\Menu\Edit\NodesData */ ?>
+<fieldset class="fieldset admin__fieldset fieldset-wide" id="menu_tree_editor_fields" xmlns="http://www.w3.org/1999/html">
+    <div id="div-data-container-node">
+        <div data-mage-init='{"menuManagerEditorRename":{}}'>
+            <div class="admin__field field field-title">
+                <label class="label admin__field-label" for="menumanager-node-name"><?= __('Node name') ?></label>
+                <div class="admin__field-control control">
+                    <input class="input-text admin__control-text" data-mage-init='{"menuManagerEditorRename":{"type":"name"}}'
+                           id="menumanager-node-name" type="text"/>
+                </div>
+            </div>
+            <div class="admin__field field field-title">
+                <label class="label admin__field-label" for="menumanager-node-status"><?= __('Status') ?></label>
+                <div class="admin__field-control control">
+                    <select class="input-select admin__control-select"
+                           data-mage-init='{"menuManagerEditorRename":{"type":"status"}}'
+                           id="menumanager-node-status" type="text">
+                        <?php foreach($block->getStatusInfo() as $status):?>
+                        <option value="<?php echo $status['value']?>"><?php echo $status['label']; ?></option>
+                        <?php endforeach;?>
+
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field field field-title">
+                <label class="label admin__field-label" for="menumanager-node-target"><?= __('Target') ?></label>
+                <div class="admin__field-control control">
+                    <select class="input-select admin__control-select"
+                           data-mage-init='{"menuManagerEditorRename":{"type":"target"}}'
+                           id="menumanager-node-target" type="text">
+                        <?php foreach ($block->getPossibleTargets() as $target): ?>
+                        <option value="<?php echo $target['value']?>"><?php echo $target['label'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field field field-title">
+                <label class="label admin__field-label" for="menumanager-node-classes"><?= __('Node CSS classes') ?></label>
+                <div class="admin__field-control control">
+                    <input class="input-text admin__control-text"
+                           data-mage-init='{"menuManagerEditorRename":{"type":"classes"}}'
+                           id="menumanager-node-classes" type="text"/>
+                </div>
+            </div>
+            <div class="admin__field field field-title">
+                <label class="label admin__field-label" for="menumanager-node-type"><?= __('Type') ?></label>
+                <div class="admin__field-control control">
+                    <select class="input-select admin__control-select"
+                           data-mage-init='{"menuManagerEditorRename":{"type":"type"}}'
+                           id="menumanager-node-type" type="text">
+                    <?php foreach($block->getNodesTypes() as $type):?>
+                    <option value="<?php echo $type['value'];?>"><?php echo $type['label'];?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <?php foreach ($block->getNodeForms() as $form): ?>
+            <?= $form->toHtml() ?>
+        <?php endforeach ?>
+       <input type="hidden" name="serialized_nodes" data-mage-init='{"menuManagerEditorSerialize":{}}'/>
+    </div>
+</fieldset>

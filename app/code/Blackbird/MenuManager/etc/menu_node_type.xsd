@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="node_type" type="nodeTypeDeclaration" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueNodeTypeName">
+            <xs:annotation>
+                <xs:documentation>
+                    Node type name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="node_type" />
+            <xs:field xpath="@name" />
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="nodeTypeDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Node Type declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="module_dependencies" type="moduleDependenciesDeclaration" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attribute name="renderer_front" type="xs:string" use="optional"/>
+        <xs:attribute name="renderer_admin" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="moduleDependenciesDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                module Dependencies declaration.
+            </xs:documentation>
+        </xs:annotation>
+       <xs:sequence>
+               <xs:element name="dependency" type="dependencyDeclaration" minOccurs="0" maxOccurs="unbounded"/>
+       </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="dependencyDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Dependency declaration
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="module_name" type="xs:string" use="required"/>
+        <xs:attribute name="version" type="xs:string" use="required"/>
+    </xs:complexType>
+
+</xs:schema>

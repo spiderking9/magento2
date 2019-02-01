@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="layouts" type="layoutsDeclaration" minOccurs="1" maxOccurs="unbounded">
+                    <xs:unique name="uniqueLayoutId">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Layout id must be unique.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="layout"/>
+                        <xs:field xpath="@id"/>
+                    </xs:unique>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueLayoutsId">
+            <xs:annotation>
+                <xs:documentation>
+                    Layouts id must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="layouts"/>
+            <xs:field xpath="@id"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="layoutsDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Layouts declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="layout" type="layoutDeclaration" minOccurs="1" maxOccurs="unbounded">
+                <xs:unique name="uniqueColumnId">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Column id must be unique.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:selector xpath="column"/>
+                    <xs:field xpath="@id"/>
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="layoutDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Layout declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="column" type="columnDeclaration" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="optional"/>
+    </xs:complexType>
+    
+    <xs:complexType name="columnDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Column declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="class" type="xs:string" use="required"/>
+        <xs:attribute name="width" type="xs:string" use="optional"/>
+        <xs:attribute name="float" type="xs:string" use="optional"/>
+    </xs:complexType>
+    
+</xs:schema>

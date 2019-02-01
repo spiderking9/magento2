@@ -1,0 +1,104 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\File */ ?>
+<script id="custom-field-file-type-template" type="text/x-magento-template">
+    <div
+            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+            class="fieldset">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th><?= __('File Path') ?></th>
+                <th><?= __('Compatible File Extensions') ?></th>
+                <% if (data.type === 'image') { %>
+                <th><?= __('Image Size') ?></th>
+                <th class="nobr"><?= __('Enable crop tool') ?></th>
+                <th class="nobr"><?= __('Keep Aspect Ratio') ?></th>
+                <th class="nobr"><?= __('Additionnal attributes') ?></th>
+                <% } %>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    <input
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][file_path]"
+                            class="input-text validate-identifier" type="text" value="<%- data.file_path %>">
+                    <div class="note"><?= __('Sub-directly to store files. e.g.: documents/') ?></div>
+                </td>
+                <td>
+                    <input
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][file_extension]"
+                            class="input-text" type="text" value="<%- data.file_extension %>">
+                    <% if (data.type === 'image') { %>
+                    <div class="note"><?= __('Comma separated list.  e.g.: tiff,png,bmp,gif,jpg,jpeg') ?></div>
+                    <% } %>
+                    <% if (data.type === 'file') { %>
+                    <div class="note"><?= __('Comma separated list.  e.g.: doc,docx,pdf,odt,xls,xlsx,csv') ?></div>
+                    <% } %>
+                </td>
+                <% if (data.type === 'image') { %>
+                <td><?= __('%1 <span>x</span> %2 <span>px.</span>',
+                        '<input class="input-text validate-number custom-field-image-crop" type="text" name="'.$block->getFieldsetName().'[<%- data.id %>]'.$block->getFieldName().'[<%- data.field_id %>][crop_w]" value="<%- data.crop_w %>">',
+                        '<input class="input-text validate-number custom-field-image-crop" type="text" name="'.$block->getFieldsetName().'[<%- data.id %>]'.$block->getFieldName().'[<%- data.field_id %>][crop_h]" value="<%- data.crop_h %>">') ?>
+                    <div
+                            class="note"><?= __('The output resolution of the image, expressed as WIDTH x HEIGHT (e.g. 640x480). Set to 0 not to rescale.') ?></div>
+                </td>
+                <td>
+                    <input type="checkbox"
+                           name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][crop]"
+                           id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_crop"
+                           value="1"
+                    >
+                </td>
+                <td>
+                    <input type="checkbox"
+                           name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][keep_aspect_ratio]"
+                           id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_keep_aspect_ratio"
+                           value="1"
+                    >
+                </td>
+                <td>
+                    <div class="control">
+                        <input type="checkbox"
+                               name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][img_alt]"
+                               id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_img_alt"
+                               value="1" id="field-type-image-alt"
+                        >
+                        <label for="field-type-image-alt" class="label"><?= __('Alt') ?></label>
+                    </div>
+                    <div class="control">
+                        <input type="checkbox"
+                               name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][img_url]"
+                               id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_img_url"
+                               value="1" id="field-type-image-url"
+                        >
+                        <label for="field-type-image-url" class="label"><?= __('URL') ?></label>
+                    </div>
+                    <div class="control">
+                        <input type="checkbox"
+                               name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][img_title]"
+                               id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_img_title"
+                               value="1"
+                        >
+                        <label for="field-type-image-title" class="label"><?= __('Title') ?></label>
+                    </div>
+                </td>
+                <% } %>
+            </tr>
+        </table>
+    </div>
+</script>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\Date */ ?>
+<script id="custom-field-date-type-template" type="text/x-magento-template">
+    <div
+            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+            class="fieldset">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th><?= __('Default Value') ?></th>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    <input
+                            id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>_value"
+                            name="<?= $block->getFieldsetName() ?>[<%- data.id %>]<?= $block->getFieldName() ?>[<%- data.field_id %>][default_value]"
+                            class="input-text validate-text"
+                            type="text" value="<%- data.default_value %>"
+                    >
+                    <div
+                            class="note"><?= __('Respect date format: mm/dd/yyyy hh:mm a, type "&lt;now&gt;" in order to automatically fill the field with current date.') ?></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</script>

@@ -1,0 +1,54 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php /** @var $block Blackbird\MenuManager\Block\Adminhtml\NodeType\Category */?>
+
+<div class="admin__field field field-title" data-mage-init='{"menuManagerCategory":{"type":"category"}}'>
+    <div class="admin__field field field-category" data-ui-id="category-chooser">
+        <label class="label admin__field-label" for="category_id_chooser">Category </label>
+        <div class="admin__field-control control">
+            <input class="input-text admin__control-text" id="category_id_chooser" type="text" name="category-chooser-field" data-mage-init='{"menuManagerEditorRename":{"type":"entity_id"}}'/>
+            <?= $block->getOpenChooserButtonHtml() ?>
+            <?= $block->getApplyButtonHtml() ?>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "Blackbird_MenuManager/js/content"
+    ], function(jQuery){
+        jQuery(function ($) {
+            var contentSet = $('[data-ui-id=category-chooser]');
+            contentSet.contentEdit(<?= $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+                [
+                    'formKey' => $block->getFormKey(),
+                    'fieldId' => 'category_id_chooser',
+                    'fieldName' => 'category-chooser-field',
+                    'fieldType' => 'category',
+                    'urlSource' => $block->getUrlSource(),
+                ]
+            )?>);
+        });
+    });
+</script>
+<script>
+    require([
+        "Blackbird_MenuManager/js/chooser",
+        "prototype"
+    ], function(RelationChooserForm){
+        window.category_id_chooser = new RelationChooserForm('category_id_chooser');
+    });
+</script>

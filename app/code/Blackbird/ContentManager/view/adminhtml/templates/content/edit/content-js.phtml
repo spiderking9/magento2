@@ -1,0 +1,36 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+
+<script>
+    require([
+        "jquery",
+        "mage/loader",
+        "jquery/jquery.cookie"
+    ], function ($) {
+        $('#import_button').on('click', function () {
+            if ($('#edit_form').valid())
+                $('body').trigger('processStart');
+        });
+
+        window.setInterval(function () {
+            if ($.cookie("downloadError")) {
+                $.cookie("downloadError", null, {path: "/admin", domain: document.domain});
+                location.reload();
+            }
+        }, 1000);
+    })
+</script>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:redefine schemaLocation="urn:magento:module:Blackbird_ContentManager:etc/contenttype_layouts.xsd">
+        <xs:complexType name="layoutsDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="layoutsDeclaration">
+                    <xs:sequence>
+                        <xs:element name="layout" type="layoutDeclaration" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                    <xs:attribute name="label" type="xs:string" use="required"/>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="layoutDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="layoutDeclaration">
+                    <xs:sequence>
+                        <xs:element name="column" type="columnDeclaration" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                    <xs:attribute name="label" type="xs:string" use="required"/>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="columnDeclaration">
+            <xs:complexContent>
+                <xs:restriction base="columnDeclaration">
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                    <xs:attribute name="class" type="xs:string" use="required"/>
+                    <xs:attribute name="width" type="xs:string" use="optional"/>
+                    <xs:attribute name="float" type="xs:string" use="optional"/>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+</xs:schema>

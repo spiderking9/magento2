@@ -1,0 +1,35 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package             Blackbird_ContentManager
+ * @copyright           Copyright (c) 2018 Blackbird (http://black.bird.eu)
+ * @author              Blackbird Team
+ * @license             http://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Type\RepeaterFields */ ?>
+<script id="custom-field-repeater_fields-type-template" type="text/x-magento-template">
+    <div id="<?= $block->getFieldsetId() ?>_<%- data.id %>_<?= $block->getFieldId() ?>_<%- data.field_id %>_<?= $block->getTypeId() ?>_<%- data.group %>"
+         class="fieldset">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th><?= __('Repeater Fields Type') ?></th>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    <?= $block->getContentTypesSelectHtml() ?>
+                    <p class="note"><?= __('Select the repeater fields type') ?></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</script>

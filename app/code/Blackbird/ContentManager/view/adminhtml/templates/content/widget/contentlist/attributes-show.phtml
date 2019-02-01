@@ -1,0 +1,162 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\Content\Widget\ContentList\AttributeShow
+ */
+?>
+
+<div id="contenttype_fieldsets_container_top" class="layout_columns admin__scope-old ">
+    <div id="attributes_to_show_container" class="sortable-wrapper form-inline">
+        <div id="attributes_to_show_container_top"></div>
+        <?= $block->getAddAttributeShowButtonHtml() ?>
+    </div>
+    <input type="hidden" class="validate-widget-attribute-to-show" id="attributes_to_show_encoded"
+           name="<?php echo $block->getWidgetFieldEncodedName(); ?>"
+           value="<?php echo $block->getElement()->getValue(); ?>"/>
+</div>
+
+<div id="attribute-to-show-field-base-template-tmp" type="text/x-magento-template" style="display: none;">
+    <div class="grid-layout-item grid-layout-item-field column-draggable admin__collapsible-block-wrapper opened"
+         id="<?= $block->getWidgetFieldId() ?>">
+        <div class="grid-layout-item-title column-handler">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#contenttype_layout_item_field_<%- data.id %>_content">
+                <span><?= __('Field'); ?></span> - <label class="field-title"><?= __('Page Title'); ?></label>
+            </strong>
+            <div class="actions">
+                <button type="button" title="<?= __('Delete Block'); ?>" class="action-delete"
+                        id="grid-layout-item-delete">
+                    <span><?= __('Delete Field'); ?></span>
+                </button>
+            </div>
+        </div>
+        <div class="grid-layout-item-content field in collapse"
+             id="contenttype_layout_item_field_<%- data.id %>_content">
+            <fieldset class="grid-layout-item-fieldset">
+                <fieldset class="grid-layout-item-alt" id="contenttype_layout_item_field_<%- data.id %>_form">
+                    <input class="input_id" type="hidden" name="<?= $block->getWidgetFieldName('id') ?>"
+                           value="<%- data.id %>"/>
+                    <input class="input_sort_order" type="hidden" name="<?= $block->getWidgetFieldName('sort_order') ?>"
+                           value="<%- data.sort_order %>"/>
+                    <!-- Form -->
+                    <div class="field">
+                        <label class="label" for="layout-field-custom_field_id"><?= __('Select Field') ?></label>
+                        <div class="control">
+                            <select id="layout-field-custom_field_id" class="layout_field_custom_field_id"
+                                    name="<?= $block->getWidgetFieldName('custom_field_id') ?>">
+                                <option value="0"><?= __('Page Title') ?></option>
+                                <?php foreach ($block->getCustomFields() as $customField) : ?>
+                                    <option type="<?= $customField['type'] ?>"
+                                            value="<?= $customField['value'] ?>"><?= $customField['label'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-label_option"><?= __('Label Option') ?></label>
+                        <div class="control">
+                            <?= $block->getLabelSelectHtml('layout-field-label_option') ?>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-label"><?= __('Label HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-label" class="layout_field_html_label_tag input-text"
+                                   type="text" name="<?= $block->getWidgetFieldName('html_label_tag') ?>"
+                                   value="<%- data.html_label_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-tag"><?= __('Wrapper HTML Element Type') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-tag" class="layout_field_html_tag input-text" type="text"
+                                   name="<?= $block->getWidgetFieldName('html_tag') ?>" value="<%- data.html_tag %>"/>
+                            <div class="note"><?= __('"div" by default. e.g: h1, h2, label, ...') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-html-id"><?= __('Wrapper HTML Element ID') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-id" class="layout_field_html_id input-text" type="text"
+                                   name="<?= $block->getWidgetFieldName('html_id') ?>" value="<%- data.html_id %>"/>
+                            <div class="note"><?= __('Replace default element ID') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"
+                               for="layout-field-html-class"><?= __('Wrapper HTML Element Classes') ?></label>
+                        <div class="control">
+                            <input id="layout-field-html-class" class="layout_field_html_class input-text" type="text"
+                                   name="<?= $block->getWidgetFieldName('html_class') ?>"
+                                   value="<%- data.html_class %>"/>
+                            <div class="note"><?= __('Additionnal CSS class(es) for the element') ?></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="layout-field-has_link"><?= __('Element Has Link') ?></label>
+                        <div class="control">
+                            <input id="layout-field-has_link"
+                                   class="layout_field_has_link input-text"
+                                   type="checkbox" value="1"
+                                   name="<?= $block->getWidgetFieldName('has_link') ?>"/>
+                            <div class="note"><?= __('The element refer to it\'s content page view.') ?></div>
+                        </div>
+                    </div>
+                    <div class="layout-field-format"></div>
+                </fieldset>
+            </fieldset>
+        </div>
+    </div>
+
+</div>
+<link rel="stylesheet" type="text/css" media="all"
+      href="<?= $block->getViewFileUrl('Blackbird_ContentManager::css/contenttype.css'); ?>"/>
+
+<script>
+    require([
+        "jquery",
+        "jquery/ui",
+        "jquery/validate",
+        "Blackbird_ContentManager/js/widget/attributes-show"
+    ], function ($) {
+        // Init template
+        $('#attributes_to_show_container_top').after(
+            "<script id='attribute-to-show-field-base-template' type='text/x-magento-template'>"
+            + $('#attribute-to-show-field-base-template-tmp').html()
+            + "</script" + ">"
+        );
+
+        // Init widget
+        var contentSet = $('#attributes_to_show_container');
+        contentSet.attributesShow();
+        contentSet.attributesShow('initialize', "<?php echo str_replace("\\'", "\\\\\'",
+        $block->getElement()->getValue()); ?>");
+
+        // Add validator
+        $.validator.addMethod(
+        'validate-widget-attribute-to-show',
+        function(value) {
+        contentSet.attributesShow('encodeAttributeToShow');
+        return true;
+        }
+        );
+        });
+</script>

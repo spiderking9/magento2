@@ -1,0 +1,66 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields
+ */
+?>
+
+<div class="fieldset-wrapper" id=" contenttype-custom-fields-wrapper" data-block="contenttype_custom_fields">
+    <!-- Page Title -->
+    <fieldset class="fieldset admin__fieldset " id="contenttype_default_page_title_fieldset">
+        <legend class="legend">
+            <span><?= __('Page Title') ?></span>
+        </legend>
+        <br>
+        <div class="messages"></div>
+        <div class="admin__field field field-informations_title  with-note"
+             data-ui-id="contentmanager-contenttype-edit-form-fieldset-element-form-field-default-page-title">
+            <label class="label admin__field-label" for="contenttype_page_title"
+                   data-ui-id="contentmanager-contenttype-edit-form-fieldset-element-text-default-page-title-label">
+                <span><?= __('Default Title Value') ?></span>
+            </label>
+            <div class="admin__field-control control">
+                <input id="contenttype_page_title" name="page_title"
+                       data-ui-id="contentmanager-contenttype-edit-form-fieldset-element-text-page-title"
+                       value="<?= $block->getPageTitle() ?>" title="<?= __('Default Title Value') ?>" type="text"
+                       class=" input-text admin__control-text">
+                <div class="note"
+                     id="default_page_title-note"><?= __('You can use replacement pattern.<br>Example: <strong>{{firstname}} - {{lastname}}</strong> will be automatically replaced by the field value of the content (field with the identifier "firstname" and "lastname").<br>Use plain text value of a field, type <strong>{{firstname|plain}}</strong>') ?></div>
+            </div>
+        </div>
+    </fieldset>
+    <!-- Custom Fields -->
+    <fieldset class="fieldset admin__fieldset " id="contenttype_custom_fields_fieldset"
+              data-role="contenttype_custom_fields_content">
+        <legend class="legend">
+            <span><?= __('Custom Fields') ?></span>
+        </legend>
+        <br>
+        <div class="messages"></div>
+
+        <div id="contenttype_fieldsets_container" class="sortable-wrapper">
+            <input type="hidden" class="init-contenttype-custom-fields-validator" value=""/>
+            <div id="contenttype_fieldsets_container_top"></div>
+            <?= $block->getFieldsetBlockHtml() ?>
+        </div>
+
+        <div class="actions">
+            <?= $block->getAddFieldsetButtonHtml() ?>
+        </div>
+    </fieldset>
+</div>

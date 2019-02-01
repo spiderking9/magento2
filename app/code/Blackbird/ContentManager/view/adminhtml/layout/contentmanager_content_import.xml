@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Blackbird_ContentManager::css/contenttype.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Import\Tabs" name="contentmanager_content_import_tabs">
+                <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Import\Tab\Form" name="contentmanager_content_import_form"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">import</argument>
+                    <argument name="block" xsi:type="string">contentmanager_content_import_form</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\Content\Import" name="contentmanager_content_import"/>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Blackbird_ContentManager::content/edit/content-js.phtml" name="content-import.js"/>
+        </referenceContainer>
+    </body>
+</page>

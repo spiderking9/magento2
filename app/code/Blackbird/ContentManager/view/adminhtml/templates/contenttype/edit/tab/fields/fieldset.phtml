@@ -1,0 +1,113 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Fields\Fieldset
+ */
+?>
+<?= $block->getFieldBlockHtml() ?>
+<script id="custom-fieldset-base-template" type="text/x-magento-template">
+    <div class="fieldset-wrapper admin__collapsible-block-wrapper opened"
+         id="<?= $block->getFieldsetId() ?>_<%- data.id %>">
+        <div class="fieldset-wrapper-title" id="custom-fieldset-title">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#fieldset-<%- data.id %>-content">
+                <span id="fieldset_<%- data.id %>_header_title"><%- data.title %></span>
+            </strong>
+            <div class="actions">
+                <button type="button" title="<?= __('Delete Custom Fieldset'); ?>" class="action-delete"
+                        id="<?= $block->getFieldsetId() ?>_<%- data.id %>_delete">
+                    <span><?= __('Delete Custom Fieldset') ?></span>
+                </button>
+            </div>
+            <div id="<?= $block->getFieldsetId() ?>_<%- data.id %>_move" data-role="draggable-handle"
+                 class="draggable-handle"
+                 title="<?= __('Sort Custom Fieldsets') ?>"></div>
+        </div>
+        <div class="fieldset-wrapper-content in collapse" id="fieldset-<%- data.id %>-content">
+            <fieldset class="fieldset">
+                <fieldset class="fieldset-alt" id="<?= $block->getFieldsetId() ?>_<%- data.id %>">
+                    <input id="<?= $block->getFieldsetId() ?>_<%- data.id %>_is_delete"
+                           name="<?= $block->getFieldsetName() ?>[<%- data.id %>][is_delete]" type="hidden" value=""/>
+                    <input id="<?= $block->getFieldsetId() ?>_<%- data.id %>_id"
+                           name="<?= $block->getFieldsetName() ?>[<%- data.id %>][id]" type="hidden"
+                           value="<%- data.id %>"/>
+                    <input id="<?= $block->getFieldsetId() ?>_<%- data.id %>_fieldset_id"
+                           name="<?= $block->getFieldsetName() ?>[<%- data.id %>][fieldset_id]" type="hidden"
+                           value="<%- data.fieldset_id %>"/>
+                    <input name="<?= $block->getFieldsetName() ?>[<%- data.id %>][sort_order]" type="hidden"
+                           value="<%- data.sort_order %>"/>
+
+                    <div class="field field-fieldset-title required">
+                        <label class="label" for="<?= $block->getFieldsetId() ?>_<%- data.id %>_title">
+                            <?= __('Fieldset Title') ?>
+                        </label>
+                        <div class="control">
+                            <input id="<?= $block->getFieldsetId() ?>_<%- data.id %>_title"
+                                   name="<?= $block->getFieldsetName() ?>[<%- data.id %>][title]"
+                                   class="required-entry input-text"
+                                   type="text"
+                                   value="<%- data.title %>"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div id="contenttype_fields_container_<%- data.id %>" class="sortable-wrapper">
+                    <div id="contenttype_fields_container_top_<%- data.id %>"></div>
+                </div>
+
+                <div class="actions">
+                    <?= $block->getAddFieldButtonHtml() ?>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</script>
+
+<script>
+    require([
+        "jquery",
+        "Blackbird_ContentManager/js/custom-fields"
+    ], function ($) {
+        // Init widget
+        var contentSet = $('[data-block=contenttype_custom_fields]');
+        contentSet.customFields();
+
+        // adding data to templates
+        <?php /** @var $_value \Magento\Framework\Object */ ?>
+        <?php foreach ($block->getFieldsetValues() as $_value) : ?>
+        contentSet.customFields('addFieldset', <?= $_value->toJson() ?>);
+        <?php endforeach; ?>
+        <?php /** @var $_value \Magento\Framework\Object */ ?>
+        <?php foreach ($block->getFieldValues() as $_value) : ?>
+        contentSet.customFields('addField', <?= $_value->toJson() ?>);
+        <?php endforeach; ?>
+        <?php /** @var $_value \Magento\Framework\Object */ ?>
+        <?php foreach ($block->getOptionValues() as $_value) : ?>
+        contentSet.customFields('addSelection', <?= $_value->toJson() ?>);
+        <?php endforeach; ?>
+
+        if (window.isExport) {
+            $("#edit_form").submit();
+        }
+
+        window.isFieldSet = true;
+    });
+</script>

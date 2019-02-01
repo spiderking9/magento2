@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Blackbird_ContentManager::css/contenttype.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tabs" name="contentmanager_contenttype_edit_tabs">
+                <!-- Define blocks -->
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Main" name="contentmanager_contenttype_edit_tab_main"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Url" name="contentmanager_contenttype_edit_tab_url"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Breadcrumb" name="contentmanager_contenttype_edit_tab_breacrumb"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Meta" name="contentmanager_contenttype_edit_tab_meta"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Sitemap" name="contentmanager_contenttype_edit_tab_sitemap"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Search" name="contentmanager_contenttype_edit_tab_search"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Layout" name="contentmanager_contenttype_edit_tab_layout"/>
+                <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit\Tab\Import" name="contentmanager_contenttype_edit_tab_import"/>
+                <!-- Add tabs -->
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">url_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_url</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">breadcrumbs_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_breacrumb</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">default_meta_tag_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_meta</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">google_sitemap_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_sitemap</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">search_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_search</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">layout_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_layout</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">import_section</argument>
+                    <argument name="block" xsi:type="string">contentmanager_contenttype_edit_tab_import</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Blackbird\ContentManager\Block\Adminhtml\ContentType\Edit" name="contentmanager_contenttype_edit"/>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" template="Blackbird_ContentManager::contenttype/edit/contenttype-js.phtml" name="contenttype.js"/>
+        </referenceContainer>
+    </body>
+</page>

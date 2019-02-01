@@ -1,0 +1,96 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\View\CustomField */ ?>
+<?php
+$_content = $block->getContent();
+$_params = $block->getParams();
+$_identifier = $block->getIdentifier();
+$_type = $block->getType();
+
+// Default value
+$_labelType = 0;
+$_htmlLabelTag = 'label';
+$_htmlTag = 'div';
+$_htmlId = '';
+$_htmlClass = '';
+
+// custom_field override
+if (isset($_params['custom_field'])) {
+    $_customField = $_params['custom_field'];
+    $_customFieldId = $_customField->getId();
+    $_label = __($_customField->getTitle());
+} else {
+    $_customFieldId = 0; //page_title
+    $_label = __('Title');
+}
+
+// Layout override
+if (isset($_params['layout'])) {
+    $_layoutCustomField = $_params['layout'];
+    $_labelType = $_layoutCustomField->getLabel();
+    $_htmlLabelTag = $_layoutCustomField->getHtmlLabelTag();
+    $_htmlTag = $_layoutCustomField->getHtmlTag();
+    $_htmlId = $_layoutCustomField->getHtmlId();
+    $_htmlClass = $_layoutCustomField->getHtmlClass();
+}
+
+// Extra params override
+if (isset($_params['params'])) {
+    $_extraParams = $_params['params'];
+    if (isset($_extraParams['label'])) {
+        $_label = $_extraParams['label'];
+    }
+    if (isset($_extraParams['label_type'])) {
+        $_labelType = $_extraParams['label_type'];
+    }
+    if (isset($_extraParams['html_label_tag'])) {
+        $_htmlLabelTag = $_extraParams['html_label_tag'];
+    }
+    if (isset($_extraParams['html_tag'])) {
+        $_htmlTag = $_extraParams['html_tag'];
+    }
+    if (isset($_extraParams['html_id'])) {
+        $_htmlId = $_extraParams['html_id'];
+    }
+    if (isset($_extraParams['html_class'])) {
+        $_htmlClass = $_extraParams['html_class'];
+    }
+    if (isset($_extraParams['has_link'])) {
+        $_hasLink = ($_extraParams['has_link'] == 1);
+    }
+}
+?>
+<?php if ($_htmlTag): ?><<?= $_htmlTag; ?> class="ct-field ct-field-<?= $_type; ?><?= $_htmlClass; ?>" id="<?php if ($_htmlId): ?><?= $_htmlId; ?><?php else: ?>ct-field-<?= $_customFieldId; ?><?php endif; ?>"><?php endif; ?>
+<?php /*Label over*/ ?>
+<?php if ($_labelType == 1): ?><?php if ($_htmlLabelTag): ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag): ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+
+<?php /*Value wrapper start*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2): ?>
+<div class="ct-value std"><?php endif; ?>
+
+    <?php /*Label inline*/ ?>
+    <?php if ($_labelType == 3): ?><?php if ($_htmlLabelTag): ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag): ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+
+<?php /*Value*/ ?>
+
+<?= $_content->getAttributeText($_identifier); ?>
+
+<?php /*Value wrapper end*/ ?>
+<?php if ($_labelType == 1 || $_labelType == 2) : ?></div><?php endif; ?>
+<?php /*Label below*/ ?>
+<?php if ($_labelType == 2): ?><?php if ($_htmlLabelTag): ?><<?= $_htmlLabelTag; ?> class="label"><?php endif; ?><?= $_label; ?><?php if ($_htmlLabelTag): ?></<?= $_htmlLabelTag; ?>><?php endif; ?><?php endif; ?>
+<?php if ($_htmlTag): ?></<?= $_htmlTag; ?>><?php endif; ?>

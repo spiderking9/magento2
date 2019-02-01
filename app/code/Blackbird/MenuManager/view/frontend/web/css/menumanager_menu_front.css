@@ -1,0 +1,7 @@
+@charset "utf-8";
+
+/* class applied to active nodes */
+a.menu-item-active > span
+{
+    text-decoration: underline;
+}

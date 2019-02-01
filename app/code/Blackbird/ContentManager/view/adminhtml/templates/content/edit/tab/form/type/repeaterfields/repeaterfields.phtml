@@ -1,0 +1,119 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ *  NOTICE OF LICENSE
+ *  If you did not receive a copy of the license and are unable to
+ *  obtain it through the world-wide-web, please send an email
+ *  to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php /** @var $block \Blackbird\ContentManager\Block\Adminhtml\Content\Edit\Tab\Form\Type\RepeaterFields\RepeaterFields */ ?>
+
+<?php
+$_element = $block->getElement();
+$idsRepeater = [];
+$idsRepeater = explode(',', $_element->getValue());
+$indexRepeater = 0
+?>
+<div class="repeater-field-container <?= $block->getRelationClass() ?> field-<?= $_element->getName() ?> <?= $_element->getRequired() != '0'
+    ? 'required _required' : '' ?> <?= !empty($_element->getNote()) ? 'with-note' : '' ?>"
+     data-ui-id="contentmanager-content-edit-form-fieldset-element-form-field-<?= $_element->getHtmlId() ?>">
+    <div class="repeater-field-header">
+        <?php echo $_element->getLabelHtml() ?>
+    </div>
+    <div class="control">
+        <script id="repeater-fields-base-template-<?= $_element->getId() ?>" type="text/x-magento-template">
+            <div id="<?= $_element->getId(); ?><%- data.id %>">
+                <div class="repeater-field-div">
+                    <?= str_replace('script', '$script$',
+                        $block->getFormHtml("<%- data.id %>", $_element->getId())); ?>
+                    <div class="actions">
+                        <button type="button" class="btn-remove-repeater acm-action-right" id="<?= $_element->getId() ?>-<%- data.id %>">
+                            <?php echo __('Remove Field'); ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <div class="repeater-fields-nested" id="repeater-fields-nested-<?= $_element->getName() ?>">
+            <?php if ($_element->getValue() != null): ?>
+                <?php /* Repeaters that were already saved */ ?>
+                <?php foreach ($idsRepeater as $id): ?>
+                    <div class="repeater-field-div">
+                        <div id="<?= $_element->getId().$indexRepeater; ?>">
+                            <?= $block->getSavedRepeater($indexRepeater, $_element->getId(), $id) ?>
+                            <input class="repeater-content-id-value" type="hidden"
+                                   name="repeater-field[<?= $_element->getId() ?>][<?= $indexRepeater ?>][content_id]"
+                                   value=<?php echo $id ?>>
+                            <div class="actions">
+                                <button type="button" class="btn-remove-saved-repeater acm-action-right"
+                                        id="<?= $_element->getId().$indexRepeater ?>">
+                                    <?php echo __('Remove Field'); ?>
+                                </button>
+                            </div>
+                            <?php $indexRepeater += 1; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <div class="actions">
+            <button type="button" class="action secondary" id="btn-repeat-<?= $_element->getId() ?>">
+                <span><?php echo __('Add New Field'); ?></span>
+            </button>
+        </div>
+        <?php if (!empty($_element->getNote())): ?>
+            <div class="note" id="<?= $_element->getHtmlId() ?>-note"><?= $_element->getNote() ?></div>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'mage/template'
+    ], function ($, mageTemplate) {
+
+        var btnRepeatField = $('#btn-repeat-<?= $_element->getId() ?>'),
+            num = <?= $indexRepeater; ?>,
+            divNestedField = $('#repeater-fields-nested-<?=$_element->getName()?>'),
+            btnRemoveSavedRepeaters = btnRepeatField.parents('.repeater-field-container').find('.btn-remove-saved-repeater');
+
+        btnRepeatField.on('click', function () {
+            var template = mageTemplate('#repeater-fields-base-template-<?= $_element->getId() ?>');
+
+            var newField = template({
+                data: {
+                    id: num
+                }
+            });
+            newField = newField.replace(/\$script\$/g, 'script'); //to interpret script because before it was not interpreted
+            num += 1;
+            divNestedField.append(newField);
+
+
+            divNestedField.on('click', '.btn-remove-repeater', function () {
+                $(this).closest('.repeater-field-div').remove();
+            })
+        });
+
+        btnRemoveSavedRepeaters.on('click', function () {
+            var repeaterDiv = $(this).closest('.repeater-field-div'),
+                repeatersToDelete = $('#content_repeater-field-repeaters-to-delete'),
+                idContent = repeaterDiv.find('.repeater-content-id-value');
+
+            //Add id of content to the input hidden to delete it after
+            repeaterDiv.addClass('ignore-validate');
+            repeatersToDelete.val(repeatersToDelete.val() + idContent.val() + ',');
+            repeaterDiv.hide();
+        })
+    });
+</script>
+
+

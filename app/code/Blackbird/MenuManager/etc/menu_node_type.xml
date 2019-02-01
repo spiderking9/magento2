@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Blackbird_MenuManager:etc/menu_node_type.xsd">
+
+    <!-- Category -->
+    <node_type name="category" label="Category" renderer_front="Blackbird\MenuManager\Block\NodeType\Category" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\Category">
+        <module_dependencies>
+            <dependency module_name="Magento_Catalog" version="100.0.1"/>
+        </module_dependencies>
+    </node_type>
+
+    <!-- Product -->
+    <node_type name="product" label="Product" renderer_front="Blackbird\MenuManager\Block\NodeType\Product" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\Product">
+        <module_dependencies>
+            <dependency module_name="Magento_Catalog" version="100.0.1"/>
+        </module_dependencies>
+    </node_type>
+
+    <!-- CMS Page -->
+    <node_type name="cms_page" label="CMS Page" renderer_front="Blackbird\MenuManager\Block\NodeType\CmsPage" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\CmsPage">
+        <module_dependencies>
+            <dependency module_name="Magento_Cms" version="101.0.1"/>
+        </module_dependencies>
+    </node_type>
+
+    <!-- CMS Block -->
+    <node_type name="cms_block" label="CMS Block" renderer_front="Blackbird\MenuManager\Block\NodeType\CmsBlock" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\CmsBlock">
+        <module_dependencies>
+            <dependency module_name="Magento_Cms" version="101.0.1"/>
+        </module_dependencies>
+    </node_type>
+
+    <!-- Custom -->
+    <node_type name="customfield" label="Custom" renderer_front="Blackbird\MenuManager\Block\NodeType\CustomField" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\CustomField"/>
+
+    <!-- Group -->
+    <node_type name="group" label="Group" renderer_front="Blackbird\MenuManager\Block\NodeType\Group" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\Group" />
+
+    <!-- Content -->
+    <node_type name="content" label="Content" renderer_front="Blackbird\MenuManager\Block\NodeType\Content" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\Content">
+        <module_dependencies>
+            <dependency module_name="Blackbird_ContentManager" version="100.1.2"/>
+        </module_dependencies>
+    </node_type>
+
+    <!-- ContentList -->
+    <node_type name="contentlist" label="Content List" renderer_front="Blackbird\MenuManager\Block\NodeType\ContentList" renderer_admin="Blackbird\MenuManager\Block\Adminhtml\NodeType\ContentList">
+        <module_dependencies>
+            <dependency module_name="Blackbird_ContentManager" version="100.1.2"/>
+        </module_dependencies>
+    </node_type>
+
+
+</config>
+   

@@ -1,0 +1,59 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php
+/** @var $block \Magento\Backend\Block\Widget\Form\Container */
+?>
+<?php /* @escapeNotVerified */ echo $block->getFormInitScripts() ?>
+<?php if ($block->getButtonsHtml('header')): ?>
+    <div class="page-form-actions" <?php /* @escapeNotVerified */ echo $block->getUiId('content-header') ?>><?php echo $block->getButtonsHtml('header') ?></div>
+<?php endif; ?>
+<form id='edit_form' method="post" action="<?php echo $block->getUrl('menumanager/menu/save');?>">
+    <input type="hidden" name="form_key" value="<?php echo $block->getFormKey();?>"/>
+<?php
+    echo $block->getChildHtml('menumanager_edit_main');
+    echo $block->getChildHtml('menumanager_edit_nodesdata');
+?>
+</form>
+<?php if ($block->hasFooterButtons()): ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $block->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+<script>
+    require([
+        'jquery',
+        'mage/backend/form',
+        'mage/backend/validation'
+    ], function($){
+
+        $('#edit_form').form()
+            .validation({
+                validationUrl: '<?php /* @escapeNotVerified */ echo $block->getValidationUrl() ?>',
+                highlight: function(element) {
+                    var detailsElement = $(element).closest('details');
+                    if (detailsElement.length && detailsElement.is('.details')) {
+                        var summaryElement = detailsElement.find('summary');
+                        if (summaryElement.length && summaryElement.attr('aria-expanded') === "false") {
+                            summaryElement.trigger('click');
+                        }
+                    }
+                    $(element).trigger('highlight.validate');
+                }
+            });
+
+    });
+</script>
+<?php /* @escapeNotVerified */ echo $block->getFormScripts() ?>
