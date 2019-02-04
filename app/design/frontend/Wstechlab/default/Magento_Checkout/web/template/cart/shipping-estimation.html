@@ -1,0 +1,19 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form method="post" id="shipping-zip-form">
+    <fieldset class="fieldset estimate">
+        <legend class="legend">
+            <span data-bind="text: isVirtual ? $t('Estimate Tax') : $t('Estimate Shipping and Tax') "></span>
+        </legend>
+        <strong>
+            <span data-bind="text: isVirtual ? $t('Enter your billing address to get a tax estimate.') : $t('Enter your destination to get a shipping estimate.')"></span>
+        </strong>
+        <!-- ko foreach: getRegion('address-fieldsets') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </fieldset>
+</form>

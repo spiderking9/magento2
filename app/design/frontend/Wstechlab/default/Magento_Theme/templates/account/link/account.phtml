@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\AuthorizationLink $block */
+
+?>
+
+<?php if($block->isLoggedIn()): ?>
+    <li class="account-link">
+        <a href="<?php echo $this->getBaseUrl().'customer/account/' ?>" >
+            <i class="material-icons">account_circle</i>
+            <span><?php echo __("Account") ?></span>
+        </a>
+    </li>
+<?php endif; ?>

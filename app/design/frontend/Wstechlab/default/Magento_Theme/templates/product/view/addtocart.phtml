@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+
+<?php
+$_product = $block->getProduct();
+
+?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+            <?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); $StockState = $objectManager->get('\Magento\CatalogInventory\Api\StockStateInterface'); ?>
+            <?php $format = $_product->getResource()->getAttribute('product_format'); ?>
+                <div class="field qty">
+                    <div class="control">
+                        <button class="qty-sub">
+                            <i class="icon icon-qty-subtract"></i>
+                        </button>
+
+                        <input data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                               value="1" type="number" size="4" class="item-qty cart-item-qty" maxlength="12" name="qty"
+                               id="qty" title="<?php echo __('Qty') ?>" />
+
+                        <button class="qty-add">
+                            <i class="icon icon-qty-add"></i>
+                        </button>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit" title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                        class="btn btn-lg btn-hot" id="product-addtocart-button">
+                    <span><?php /* @escapeNotVerified */echo $buttonTitle ?></span>
+                </button>
+                <?php echo $block->getChildHtml('', true) ?>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+	<div class="quantityInfoOut">
+        <span>
+            <?php echo __('Non Disponibile'); ?>
+        </span>
+    </div>
+<?php endif; ?>
+
+
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php if (!$block->isRedirectToCartEnabled()) : ?>
+    <script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "catalogAddToCart": {
+                "bindSubmit": false
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,72 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2017 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+$collection = $block->getCollection();
+$link = $block->getLink();
+?>
+
+<div class="block widget homepage-slider-widget">
+    <?php if (!empty($collection)) : ?>
+        <div class="homepage-slider-wrapper">
+            <div class="homepage-slider" data-slick='{
+                "lazyLoad": "ondemand",
+                "dots": false,
+                "arrows": true,
+                "slidesToShow": 1,
+                "slidesToScroll": 1,
+                "prevArrow": ".homepage-slider-arrow-prev",
+                "nextArrow": ".homepage-slider-arrow-next",
+                "infinite": true
+            }'>
+                <?php foreach($collection as $content): ?>
+                    <?php
+                        $image = $content->getImage('homepage_slide_image');
+                    ?>
+
+                    <div class="homepage-slide">
+                        <div class="slider-wrapper">
+                            <div class="slider-img">
+                                <img data-lazy="<?php echo $image ?>" />
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+            <div class="homepage-slider-arrows">
+                <button class="homepage-slider-arrow-prev disabled">
+                    <i class="icon icon-arrow-left"></i>
+                </button>
+                <span class="current-slide-number"><span class="current">1</span>/<?php echo count($collection); ?></span>
+                <button class="homepage-slider-arrow-next">
+                    <i class="icon icon-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <script>
+            require([
+                "jquery"
+            ], function(jQuery){
+                (function($) {
+                    $('.homepage-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+                        $('.current-slide-number > .current').html(nextSlide + 1);
+                    });
+                })(jQuery);
+            });
+        </script>
+    <?php endif; ?>
+</div>

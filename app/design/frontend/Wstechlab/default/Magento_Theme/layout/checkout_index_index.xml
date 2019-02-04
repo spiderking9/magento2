@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout-cart" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceContainer name="checkout.header.wrapper.left">
+            <block class="Magento\Framework\View\Element\Template" name="checkout-header-addresses" template="Magento_Checkout::layout/header-addresses.phtml" />
+        </referenceContainer>
+
+        <referenceContainer name="checkout.header.wrapper.right">
+            <block class="Magento\Framework\View\Element\Template" name="checkout-header-continue-shopping" template="Magento_Checkout::layout/header-continue-shopping.phtml" />
+        </referenceContainer>
+
+        <move element="page.main.title" destination="checkout.root" />
+
+    </body>
+</page>

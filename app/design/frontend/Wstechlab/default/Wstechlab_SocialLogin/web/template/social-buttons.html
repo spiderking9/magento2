@@ -1,0 +1,10 @@
+<div class="block social-login-authentication-popup">
+    <div class="block-content" data-bind="foreach: socials()">
+			<div class="social-btn" data-bind="css: key + '-login'">
+                <a class="btn btn-block btn-social" data-bind="css: 'btn-' + btn_key, socialButton: $parent.isActive, url: url, label: label" >
+                    <span class="fa" data-bind="css: 'fa-' + btn_key"></span>
+                    <span data-bind="i18n: 'Sign in with'"></span> <span data-bind="text:label" ></span>
+                </a>
+            </div>
+    </div>
+</div>

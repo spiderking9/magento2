@@ -1,0 +1,13 @@
+<?php
+    /**
+     * Add variable to show social buttons on customer authentication popup
+     */
+    $availableSocials = $block->getAvailableSocials();
+    $authenConfig = $block->getSocialButtonsConfig();
+?>
+
+<?php if (sizeof($availableSocials)): ?>
+    <script>
+        window.socialAuthenticationPopup = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($authenConfig); ?>;
+    </script>
+<?php endif; ?>

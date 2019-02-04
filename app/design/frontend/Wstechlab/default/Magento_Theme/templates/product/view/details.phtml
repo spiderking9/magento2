@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('detailed_info', 'getChildHtml')):?>
+    <div class="product info detailed">
+        <?php $layout = $block->getLayout(); $itemsHtml = '';?>
+        <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+            <?php
+            $iterator = 1;
+            foreach ($detailedInfoGroup as $name):?>
+                <?php
+                    $html = $layout->renderElement($name);
+                    if (!trim($html)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+
+                    $itemsHtml .= '<div class="data-item-html data-html-'.$iterator.'" id="'.$alias.'" data-role="content">'.$html.'</div>';
+                ?>
+                <div class="data item title"
+                     aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
+                     data-iterator="<?php echo $iterator;?>"
+                     data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
+                    <a class="data switch"
+                       tabindex="-1"
+                       data-toggle="switch"
+                       href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
+                       id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                        <?php /* @escapeNotVerified */ echo $label; ?>
+                    </a>
+                </div>
+            <?php $iterator++; endforeach;?>
+        </div>
+        <div class="data-items-html">
+            <?php echo $itemsHtml; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+
+    require([
+        'jquery',
+    ], function () {
+
+        jQuery('.data-items-html div:first-child').show();
+
+        jQuery('.data.item.title a.switch').parent().on('click', function(event){
+            event.preventDefault();
+
+            var tabAlias = jQuery(this).data('iterator');
+
+            jQuery('.data-items-html > div').hide();
+
+            jQuery('.data-items-html > div.data-html-'+tabAlias).show();
+        });
+
+    });
+    
+</script>

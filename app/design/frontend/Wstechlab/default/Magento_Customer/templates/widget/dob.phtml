@@ -1,0 +1,60 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Widget\Dob $block */
+?>
+
+<?php
+$dob=$block->getDate();
+$year='';
+$smonth='';
+$day='';
+if($dob){
+	$dateofbirth = explode("-", $dob);
+	$year=$dateofbirth[0];
+	$smonth=$dateofbirth[1];
+	$day=$dateofbirth[2];
+}
+?>
+
+<div class="field dob customer-dob">
+    <label for="dob" class="label label-light"><span><?php /* @escapeNotVerified */ echo __('Date of birth') ?></span>
+        <span class="optional"><?php /* @escapeNotVerified */ echo __('(optional)') ?></span>
+    </label>
+    <div class="custom-cols">
+        <input type="hidden" class="" value="<?php echo $dob; ?>" id="dob" name="dob" autocomplete="off">
+
+        <div class="custom-col">
+            <input type="text"  value="<?php echo $day; ?>" name="date" id="dob_dd" title="<?php /* @escapeNotVerified */ echo __('dd') ?>" class="input-text validate-cdobd" placeholder="DD" maxlength="2"
+                   onkeyup="moveOnMax(this,document.getElementById('dob_mm'))"/>
+        </div>
+
+        <div class="custom-col">
+            <select id="dob_mm" name="month" title="<?php /* @escapeNotVerified */ echo __('mm') ?>"  class="select validate-cdobm">
+                <option value=""><?php /* @escapeNotVerified */ echo __('MM') ?></option>
+                <?php for($month=1;$month<=12;$month++):?>
+                    <option value="<?php /* @escapeNotVerified */ echo __($month) ?>" <?php if ($month == $smonth) echo ' selected="selected"' ?> ><?php /* @escapeNotVerified */ echo __($month) ?></option>
+                <?php endfor; ?>
+            </select>
+        </div>
+
+        <div class="custom-col">
+            <input type="text" maxlength="4" value="<?php echo $year; ?>"name="year" id="dob_yy" title="<?php /* @escapeNotVerified */ echo __('yy') ?>" class="validate-cdoby" placeholder="YYYY" onkeyup="moveOnMax(this,document.getElementById('gender'))"/>
+        </div>
+
+        <div class="validate-custom"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function moveOnMax(field, nextFieldID) {
+        if (field.value.length >= field.maxLength) { nextFieldID.focus(); }
+    }
+
+</script>

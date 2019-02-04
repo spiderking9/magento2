@@ -1,0 +1,23 @@
+<div class="page-main custommer-top-banner">
+    <div class="top-info">
+        <?= $block->getChildHtml('breadcrumbs') ?>
+
+        <div class="inner">
+            <h2 >
+                <?php echo __('Benvenuta ') ?>
+                <span class="text-uppercase">
+                    <?php echo $block->getName(); ?>
+                </span>
+            </h2>
+            <p>
+		        <?php echo __('Non sei?:') ?>
+                <span class="text-uppercase"><?php echo $block->getCustomer()->getFirstname(); ?></span>
+                <a href="<?php echo $block->getUrl('customer/account/logout'); ?>"><?php echo __('Logout') ?></a>
+            </p>
+        </div>
+    </div>
+
+    <div class="top-img">
+	    <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('customer_banner_top')->toHtml();?>
+    </div>
+</div>

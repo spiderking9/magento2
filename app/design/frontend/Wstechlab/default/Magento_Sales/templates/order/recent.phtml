@@ -1,0 +1,163 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$imageHelper = $objectManager->create('Magento\Catalog\Helper\Image');
+$productModel = $objectManager->create('Magento\Catalog\Model\Product');
+$orderModel = $objectManager->create('Magento\Sales\Model\Order')
+?>
+<div class="block block-dashboard-orders">
+    <?php $_orders = $block->getOrders(); ?>
+    <div class="block-title order no-display">
+        <strong><?php /* @escapeNotVerified */
+            echo __('Recent Orders') ?></strong>
+        <?php if (sizeof($_orders->getItems()) > 0): ?>
+            <a class="action view" href="<?php /* @escapeNotVerified */
+            echo $block->getUrl('sales/order/history') ?>">
+                <span><?php /* @escapeNotVerified */
+                    echo __('View All') ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+        <?php echo $block->getChildHtml() ?>
+        <?php if (sizeof($_orders->getItems()) > 0): ?>
+            <div class="table-wrapper orders-recent">
+                <table class="data table table-order-items recent" id="my-orders-table">
+                    <caption class="table-caption"><?php /* @escapeNotVerified */
+                        echo __('Recent Orders') ?></caption>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col decoration"></th>
+                        <th scope="col" class="col id"><?php /* @escapeNotVerified */
+                            echo __('Order') ?></th>
+                        <th scope="col" class="col date"><?php /* @escapeNotVerified */
+                            echo __('Date') ?></th>
+                        <th scope="col" class="col shipping"><?php /* @escapeNotVerified */
+                            echo __('Ship To') ?></th>
+                        <th scope="col" class="col total"><?php /* @escapeNotVerified */
+                            echo __('Order Total') ?></th>
+                        <th scope="col" class="col status"><?php /* @escapeNotVerified */
+                            echo __('Status') ?></th>
+                        <th scope="col" class="col actions"><?php /* @escapeNotVerified */
+                            echo __('Action') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($_orders as $_order):
+
+
+                        ?>
+                        <tr>
+                            <td class="col decoration">
+                                <div class="circle" data-id="<?php echo $_order->getRealOrderId() ?>">
+                                    <i class="material-icons">expand_more</i>
+                                </div>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Order #')) ?>" class="col id">
+                                #<?php /* @escapeNotVerified */
+                                echo $_order->getRealOrderId() ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Date')) ?>"
+                                class="col date"><?php /* @escapeNotVerified */
+                                echo $block->formatDate($_order->getCreatedAt()) ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Ship To')) ?>"
+                                class="col shipping"><?php echo $_order->getShippingAddress() ? $block->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Order Total')) ?>"
+                                class="col total"><?php /* @escapeNotVerified */
+                                echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>"
+                                class="col status"><?php /* @escapeNotVerified */
+                                echo $_order->getStatusLabel() ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <a href="<?php /* @escapeNotVerified */
+                                echo $block->getViewUrl($_order) ?>" class="action view">
+                            <span><?php /* @escapeNotVerified */
+                                echo __('View Order') ?></span>
+                                </a>
+                                <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId())) : ?>
+                                    <a href="#" data-post='<?php /* @escapeNotVerified */
+                                    echo
+                                    $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                                        ->getPostData($block->getReorderUrl($_order))
+                                    ?>' class="action order">
+                                <span><?php /* @escapeNotVerified */
+                                    echo __('Reorder') ?></span>
+                                    </a>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                        <tr class="order-items hidden" data-order-items="<?php echo $_order->getRealOrderId() ?>">
+                            <td colspan="7">
+                                <?php
+                                $order = $orderModel->load($_order->getRealOrderId());
+                                $orderItems = $order->getAllItems();
+                                foreach ($orderItems as $orderItem):
+                                    $product = $productModel->load($orderItem->getProductId());
+
+                                    $orderOptions = $orderItem->getProductOptions();
+                                    $configurationOptions = [];
+                                    if (!empty($orderOptions['attributes_info'])) {
+                                        foreach ($orderOptions['attributes_info'] as $key => $value) {
+                                            $configurationOptions[] = $value['label'] . ' <strong>' . $value['value'] . '</strong>';
+                                        }
+                                    }
+
+                                    $image = $imageHelper->init($product, 'category_page_list')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(100)->getUrl();
+
+                                    ?>
+
+                                    <div class="order-item">
+                                        <div class="order-item-image"><img src="<?php echo $image ?>"/></div>
+                                        <div class="order-item-details">
+                                            <div class="order-item-name"><a
+                                                        href="<?php echo $product->getProductUrl() ?>"><?php echo $product->getName() ?></a>
+                                            </div>
+                                            <div class="order-item-sku"><?php echo __('SKU') ?>: <strong><?php echo $product->getSku() ?></strong></div>
+                                            <div class="order-item-options"><?php echo __('Taglia') ?>: <?php echo implode(' | ', $configurationOptions) ?></div>
+                                            <div class="order-item-qty"><?php echo __('Qta') ?>: <strong><?php echo round($orderItem->getQtyOrdered()) ?></strong></div>
+                                            <div class="order-item-price"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($product->getFinalPrice(),2),true,false); ?></div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?php /* @escapeNotVerified */ echo __('You have placed no orders.'); ?></span>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <?= $block->getChildHtml('customer_products_bottom'); ?>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+
+            $('div.circle').on('click', function () {
+                var dataOrderId = $(this).data('id');
+                $(this).parents().eq(2).find('tr[data-order-items="' + dataOrderId + '"]').toggleClass('hidden');
+
+                if ($(this).find('i').text() == 'expand_more') {
+                    $(this).find('i').html('expand_less');
+                } else {
+                    $(this).find('i').html('expand_more');
+                }
+
+            });
+
+        });
+    });
+</script>

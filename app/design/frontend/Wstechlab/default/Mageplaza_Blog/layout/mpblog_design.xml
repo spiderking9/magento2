@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Blog
+ * @copyright   Copyright (c) 2017 Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Mageplaza_Shopbybrand::css/style.css"/>
+        <remove src="Mageplaza_Core::css/grid-mageplaza.css"/>
+    </head>
+    <body>
+        <move element="mpblog.sidebar.topic" destination="blog.sidebar.main" before="mpblog.sidebar.search" />
+
+        <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="css_class" xsi:type="string">blog-title</argument>
+            </arguments>
+
+            <block class="Magento\Framework\View\Element\Template" name="blog.page.subtitle" template="Magento_Theme::blog/subtitle.phtml"/>
+        </referenceBlock>
+
+        <move element="page.main.title" destination="main" before="-" />
+
+        <referenceBlock name="breadcrumbs" remove="true" />
+
+        <referenceBlock name="blog.sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" name="blog.social.icons" template="Mageplaza_Blog::social/social.phtml" after="mpblog.sidebar.search" />
+
+            <container name="homepage.instagram.widget" htmlTag="div" htmlClass="instagram-widget-container blog-instagram-widget" after="blog.social.icons" >
+                <block class="Magento\Cms\Block\Block" name="blog.instagram.info">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string" translate="true">instagram_info</argument>
+                    </arguments>
+                </block>
+                <block class="Bitbull\InstagramWidget\Block\Instagram" name="blog.instagram.widget" template="Bitbull_InstagramWidget::instagram-widget.phtml" >
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Instagram</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+
+        <referenceBlock name="mpblog.copy.right" remove="true" />
+    </body>
+</page>

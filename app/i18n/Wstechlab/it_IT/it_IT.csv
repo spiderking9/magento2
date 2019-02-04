@@ -1,0 +1,43 @@
+"Checkout", "Completa l’ordine", module, Magento_Checkout
+"Delete", "Elimina"
+"filters", "filtri"
+"Hide", "Nascondi"
+"My Cart", "Il tuo carrello", module, Magento_Checkout
+"Products","Prodotti", module, Magento_Checkout
+"My billing and shipping address are the same", "Indirizzo di fatturazione diverso da quello di spedizione", module, Magento_Checkout
+"Go to Checkout","Concludi l'acquisto"
+"Password","Password"
+"Log in","Hai già un account? Accedi"
+"Company","Società"
+"Cart Subtotal","Subtotale"
+"Order total","Totale"
+"Estimate Shipping and Tax","Calcola Spese di Spedizione"
+"Shopping Options","Filtra i prodotti per"
+"Sign-in Information","Informazioni Account"
+"Apply Discount Code","Hai un codice promozionale?"
+"Sign in with", "Accedi con"
+"Sign in with", "Accedi con", module, Mageplaza_SocialLogin
+"Related Posts", "Articoli Correlati", module, Megaplaza_Blog
+"Related Products", "Prodotti Correlati", module, Megaplaza_Blog
+"Already registered?", "Hai già un Account?", module, Magento_Checkout
+"Log in to see your data", "Accedi per recuperare i tuoi dati", module, Magento_Checkout
+"Continue Shopping", "Continua Lo Shopping", module, Magento_Checkout
+"Continue Shopping", "Continua Lo Shopping", module, Magento_Multishipping
+"Shipping", "Spedizione"
+"You will be charged by an extra fee of %1 (+%2 taxes)", "Ti verrà addebitato un costo aggiuntivo di 10,00 € (+0,00 € tasse)"
+"Print receipt","Stampa riepilogo ordine"
+"Your order has been completed correctly.","Il tuo ordine è stato completato correttamente."
+"Logout", "Esci"
+"My Downloadable Products", "Piani nutrizionali scaricabili"
+"Remember that you have to be registered to the website to finalize the purchase of this product. Login in or create a new account.","Ricordati che devi essere iscritto al sito per completare l'acquisto di questo prodotto. Fai il login o crea un nuovo account."
+"Last Available. Do not let it get away", "Ultimo Disponibile. Non ti lo fare scappare"
+"products", "prodotti"
+"Articles displayed", "Articoli Visualizzati"
+"Go to category", "Vai alla categoria"
+"Please wait...","Attendere prego..."
+"Loading...","Attendere prego..."
+"My Wish List","Wishlist ",module,Magento_Wishlist
+"Sign in with","Registrati/Accedi con"
+"Continue shopping","Continua lo shopping"
+"Are you sure you would like to move this item from the shopping cart to wishlist?","Sei sicuro di voler spostare questo articolo dal carrello alla wishlist?"
+"Buy %1 for %2 each and <strong class=""benefit"">save<span class=""percent tier-%3"">&nbsp;%4</span>%</strong>","Buy %1 for %2 each and save<span class=""percent tier-%3"">&nbsp;%4 %</span>"

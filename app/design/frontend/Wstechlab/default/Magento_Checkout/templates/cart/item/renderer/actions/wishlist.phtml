@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Remove */
+?>
+
+<a href="#" title="<?= $block->escapeHtml(__('Sposta sulla wishlist')) ?>" class="action action-move-to-wishlist" data-post='<?= /* @escapeNotVerified */ $block->getMoveFromCartParams() ?>'>
+    <span>
+        <?= /* @escapeNotVerified */ __('Sposta sulla wishlist') ?>
+    </span>
+    <i class="material-icons">favorite_border</i>
+</a>

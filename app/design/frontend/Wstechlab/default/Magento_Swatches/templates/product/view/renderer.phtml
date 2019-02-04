@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+//"swatchRenderer": {
+
+    $attributes = json_decode($block->getJsonConfig());
+    $codes = array();
+    $guides = array();
+
+    foreach($attributes->attributes as $key => $value) {
+        array_push($codes, $value->code);
+    }
+
+    foreach($codes as $code) {
+        $cmsBlock = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('attribute_guide_'.$code);
+        $guide = (object) array('code' => $code, 'title' => $code.' guide' ,  'content' => $cmsBlock->toHtml());
+        array_push($guides, $guide);
+    }
+
+?>
+<?php /** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */ ?>
+<div class="swatch-opt" data-role="swatch-options"></div>
+<!---->
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=swatch-options]": {
+            "Magento_Swatches/js/swatch-renderer": {
+                "jsonConfig": <?= /* @escapeNotVerified */ $swatchOptions = $block->getJsonConfig() ?>,
+                "jsonSwatchConfig": <?php /* @noEscape */ echo $block->getJsonSwatchConfig(); ?>,
+                "mediaCallback": "<?= /* @escapeNotVerified */ $block->getMediaCallback() ?>",
+                "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+                    'Magento_ConfigurableProduct') ?: 'replace'; ?>",
+                "attrGuides": <?php echo json_encode($guides) ?>
+            },
+            "Magento_Swatches/js/configurable-customer-data": {
+                    "swatchOptions": <?php /* @noEscape */ echo $swatchOptions ?>
+            }
+        }
+    }
+</script>

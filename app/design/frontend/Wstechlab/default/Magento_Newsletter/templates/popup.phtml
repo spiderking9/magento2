@@ -1,0 +1,158 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<div class="newsletter-popup-wrapper">
+    <div id="newsletter-popup-custom" data-role="modal-popup-newsletter">
+        <div class="newsletter-modal">
+            <div class="content subscribe">
+                <div class="image"></div>
+
+                <div class="wrapper">
+                    <div class="title decoration-underline"><?php echo __("10% discount for you") ?></div>
+                    <p class="subtitle">
+                        <?php echo __("Subscribe to the newsletter and discover the new arrivals, get a preview of the flashes of the new collections, access to offers and exclusions") ?>
+                    </p>
+
+                    <form class="form subscribe"
+                          novalidate
+                          action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl() ?>"
+                          method="post"
+                          data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                          id="newsletter-validate-detail-popup">
+                        <div class="field">
+                            <div class="control">
+                                <input name="email" type="email" id="newsletter-email-popup" placeholder="<?php /* @escapeNotVerified */ echo __('Email address') ?>" data-validate="{required:true, 'validate-email':true}"/>
+                            </div>
+                        </div>
+
+                        <div class="radio-buttons inline">
+                            <div class="field">
+                                <input class="radio donna-radio" type="radio" name="sesso" value="<?php /* @escapeNotVerified */ echo __('Woman') ?>"><label><?php /* @escapeNotVerified */ echo __('Woman') ?></label>
+                            </div>
+                            <div class="field">
+                                <input class="radio uomo-radio" type="radio" name="sesso" value="<?php /* @escapeNotVerified */ echo __('Man') ?>"><label><?php /* @escapeNotVerified */ echo __('Man') ?></label>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button class="action subscribe-btn primary"  type="submit">
+                                <span><?php /* @escapeNotVerified */ echo __('Sign me up to the Newsletter') ?></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <p><?php echo __("By signing up, I accept the terms of the Privacy Notice and consent to receive Entrophia e-mails with access to our latest collections, events and campaigns of the brand.") ?></p>
+
+                    <a href="#" class="subscription-popup-close"><?php echo __('Remind me later') ?></a>
+                </div>
+            </div>
+            <div class="content subscribe-success" style="display:none">
+                <div class="wrapper">
+                    <div class="title decoration-underline"><?php echo __('Thank you for being one of us') ?></div>
+                    <p>
+                        <?php echo __('You have registered for our newsletter as'); ?>
+                    </p>
+
+                    <span class="subscriber-email"></span>
+
+                    <p>
+                        <?php echo __('Our first gift for you has been sent to this address, a discount code of € 5'); ?>
+                    </p>
+
+                    <p>
+                        <?php echo __('To receive more personalized content, including access to special events and the latest news in your area, complete the following information and create your own account:'); ?>
+                    </p>
+
+                    <div class="actions">
+                        <a href="<?= $block->escapeUrl($block->getBaseUrl()) ?>customer/account/create/" class="btn btn-lg create-account-btn">
+                            <span><?php echo __('Create an Account') ?></span>
+                        </a>
+
+                        <a href="#" class="subscription-popup-close" ><?php echo __("at the moment I'm not interested") ?></a>
+                    </div>
+                </div>
+            </div>
+
+            <div data-role="loader" class="loading-mask" style="display: none">
+                <div class="loader">
+                    <img src="<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>" alt="<?= /* @escapeNotVerified */ __('Loading...') ?>">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal",
+        "mage/cookies"
+    ], function($){
+        var popup_cookie = $.cookie('newsletter_popup');
+        var newsletter = $('.newsletter-modal');
+        var popupWrapper = $('[data-role="modal-popup-newsletter"]');
+
+        popupWrapper.modal({
+            clickableOverlay: true,
+            modalClass: 'newsletter-popup-custom',
+            type: 'popup',
+            buttons: []
+        });
+
+        $(document).on('click', '.subscription-popup-close', function(e) {
+            e.preventDefault();
+
+            $.cookie('newsletter_popup', true, { expires: 1 });
+
+            popupWrapper.modal('closeModal');
+        });
+
+        $(document).on('click', '.newsletter-popup-custom [data-role="closeBtn"]', function() {
+            $.cookie('newsletter_popup', true, { expires: 1 });
+        });
+
+        $("form#newsletter-validate-detail-popup").on('submit', function(e){
+            e.preventDefault();
+            newsletter.find('[data-role="loader"]').show();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: "POST",
+                data: $(this).serialize()
+            }).done(function() {
+                newsletter.find('.content.subscribe').hide();
+                newsletter.find('[data-role="loader"]').hide();
+
+                var email = newsletter.find('input#newsletter-email-popup').val();
+
+                $('.subscriber-email').text(email);
+
+                newsletter.find('.content.subscribe-success').show();
+
+                $.cookie('newsletter_popup', true, { expires: 1 });
+
+            }).fail(function( jqXHR, textStatus ) {
+                console.log( "Request failed: " + textStatus );
+            });
+        });
+
+        // return if dev mode
+        if(window.location.port) {
+            return;
+        }
+
+        if(!popup_cookie || popup_cookie === false) {
+
+            popupWrapper.modal('openModal');
+
+            $.cookie('newsletter_popup', true, { expires: 1 });
+        }
+
+    });
+</script>

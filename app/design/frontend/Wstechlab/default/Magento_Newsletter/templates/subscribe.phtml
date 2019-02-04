@@ -1,0 +1,51 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="block newsletter">
+    <div class="content-newsletter">
+        <div class="newsletter-wrapper">
+            <div class="title"><?php echo __("Iscriviti alla newsletter e ottieni un 10% sconto") ?></div>
+            <p class="subtitle"><?php echo __("Inoltre, scopri i nuovi arrivi, ricevi in anteprima i flash delle nuove colleziono. Accedi ad offerte eclusive") ?></p>
+            <form class="form subscribe"
+                novalidate
+                action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl() ?>"
+                method="post"
+                data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                id="newsletter-validate-detail">
+                <div class="field">
+                    <div class="control">
+                        <input name="email" type="email" id="newsletter-email"
+                                    placeholder="<?php /* @escapeNotVerified */ echo __('Indirizzo email') ?>"
+                                    data-validate="{required:true, 'validate-email':true}"/>
+                    </div>
+                </div>
+                <div class="radio-buttons inline">
+                    <div class="field">
+                        <input class="radio donna-radio" type="radio" name="sesso" value="donna" /><label><?php /* @escapeNotVerified */ echo __('Donna') ?></label>
+                    </div>
+                    <div class="field">
+                        <input class="radio uomo-radio" type="radio" name="sesso" value="uomo" /><label><?php /* @escapeNotVerified */ echo __('Uomo') ?></label>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="action subscribe-btn primary" title="<?php /* @escapeNotVerified */ echo __('Iscrivimi') ?>" type="submit">
+                        <span><?php /* @escapeNotVerified */ echo __('Iscrivimi') ?></span>
+                    </button>
+                </div>
+            </form>
+            <p><?php echo __("Iscrivendomi, accetto i termini dell’Informativa a tutela della privacy e acconsento a ricevere le email di informazioni Entrophia relative alle ultime collezioni, agli eventi e alle campagne del marchio.") ?></p>
+        </div>
+        <div class="social-wrapper">
+            <div class="title"><?php echo __("Lasciati Ispirare") ?></div>
+            <div class="newsletter-social">
+                <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_newsletter_social')->toHtml();?>
+            </div>
+        </div>
+    </div>
+</div>

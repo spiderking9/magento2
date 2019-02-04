@@ -1,0 +1,163 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_LayeredNavigationPro
+ * @copyright   Copyright (c) 2017 Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+
+<?php
+    /** @type \Mageplaza\LayeredNavigation\Model\Layer\Filter\Attribute $filter */
+    $filter = $block->getFilter();
+
+    /** @type \Mageplaza\LayeredNavigationPro\Model\Layer\Filter $filterModel */
+    $filterModel = $block->getFilterModel();
+
+    $searchEnable = $block->isSearchEnable();
+    $attCode = $filter->getRequestVar();
+    // get items, retrieve subcategories for category
+    $items = $this->rebuildItems();
+?>
+
+<?php if($searchEnable): ?>
+    <input type="text" class="layer-search-box" code="<?php echo $attCode ?>" placeholder="<?php echo __('Search') ?>" />
+<?php endif; ?>
+
+<ol class="items ln-items-<?php echo $attCode ?> <?php echo $searchEnable ? 'layer-search-list layer-search-list-' . $attCode : '' ?>">
+    <?php if($attCode == 'cat'): ?>
+        <?php foreach ($items as $item): ?>
+
+            <?php
+                $subcategories = $this->getSubcategories($item->getValue());
+            ?>
+
+            <?php if(!empty($subcategories)): ?>
+
+                <li class="item item-parent-categories <?php echo $filterModel->isSelected($item) ? 'on' : ''  ?>"  <?php echo $searchEnable ? "data-search-term=\"" . strtolower($item->getLabel()) . "\"" : ''; ?>>
+                    <?php if ($item->getCount() > 0): ?>
+
+                        <?php if(!empty($subcategories)): ?>
+                            <span class="parent">
+                        <?php echo $item->getLabel() ?>
+                                <?php if ($filterModel->isShowCounter($filter)): ?>
+                                    <span class="count">(<?php echo $item->getCount()?>)</span>
+                                <?php endif; ?>
+                    </span>
+                        <?php else: ?>
+                            <a href="<?php echo $block->escapeUrl($filterModel->getItemUrl($item)) ?>">
+                                <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" <?php echo $filterModel->isSelected($item) ? 'checked="checked"' : ''  ?> class="layer-input-filter" name="filter_<?php echo $attCode ?>">
+                                <?php echo $item->getLabel() ?>
+                                <?php if ($filterModel->isShowCounter($filter)): ?>
+                                    <span class="count">(<?php echo $item->getCount()?>)</span>
+                                <?php endif; ?>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if(!empty($subcategories)): ?>
+                            <ol class="items ln-items-<?php echo $attCode ?>-sub <?php echo $searchEnable ? 'layer-search-list layer-search-list-' . $attCode : '' ?>">
+                                <?php foreach($subcategories as $subItem): ?>
+                                    <li class="item <?php echo $filterModel->isSelected($subItem) ? 'on' : ''  ?>"  <?php echo $searchEnable ? "data-search-term=\"" . strtolower($subItem->getLabel()) . "\"" : ''; ?>>
+
+                                        <a href="<?php echo $block->escapeUrl($filterModel->getItemUrl($subItem)) ?>">
+                                            <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" <?php echo $filterModel->isSelected($subItem) ? 'checked="checked"' : ''  ?> class="layer-input-filter" name="filter_<?php echo $attCode ?>">
+                                            <?php echo $subItem->getLabel() ?>
+                                            <?php if ($filterModel->isShowCounter($filter)): ?>
+                                                <span class="count">(<?php echo $subItem->getCount()?>)</span>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                        <?php endif; ?>
+                    <?php elseif($filterModel->isShowZero($filter)): ?>
+                        <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" disabled="disabled" class="layer-input-filter" name="filter_<?php echo $attCode ?>"/>
+                        <?php echo $item->getLabel() ?>
+                        <?php if ($filterModel->isShowCounter($filter)): ?>
+                            <span class="count">(<?php echo $item->getCount()?>)</span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </li>
+
+            <?php endif; ?>
+        <?php endforeach ?>
+
+        <?php foreach ($items as $item): ?>
+            <?php
+                $subcategories = $this->getSubcategories($item->getValue());
+            ?>
+
+            <?php if(empty($subcategories)): ?>
+
+                <li class="item <?php echo $filterModel->isSelected($item) ? 'on' : ''  ?>"  <?php echo $searchEnable ? "data-search-term=\"" . strtolower($item->getLabel()) . "\"" : ''; ?>>
+                    <?php if ($item->getCount() > 0): ?>
+
+                        <?php if(!empty($subcategories)): ?>
+                            <span class="parent">
+                                <?php echo $item->getLabel() ?>
+                                <?php if ($filterModel->isShowCounter($filter)): ?>
+                                    <span class="count">(<?php echo $item->getCount()?>)</span>
+                                <?php endif; ?>
+                            </span>
+                        <?php else: ?>
+                            <a href="<?php echo $block->escapeUrl($filterModel->getItemUrl($item)) ?>">
+                                <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" <?php echo $filterModel->isSelected($item) ? 'checked="checked"' : ''  ?> class="layer-input-filter" name="filter_<?php echo $attCode ?>">
+                                <?php echo $item->getLabel() ?>
+                                <?php if ($filterModel->isShowCounter($filter)): ?>
+                                    <span class="count">(<?php echo $item->getCount()?>)</span>
+                                <?php endif; ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php elseif($filterModel->isShowZero($filter)): ?>
+                        <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" disabled="disabled" class="layer-input-filter" name="filter_<?php echo $attCode ?>"/>
+                        <?php echo $item->getLabel() ?>
+                        <?php if ($filterModel->isShowCounter($filter)): ?>
+                            <span class="count">(<?php echo $item->getCount()?>)</span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </li>
+            <?php endif; ?>
+        <?php endforeach ?>
+    <?php else: ?>
+
+        <?php foreach ($items as $item): ?>
+
+            <li class="item <?php echo $filterModel->isSelected($item) ? 'on' : ''  ?>"  <?php echo $searchEnable ? "data-search-term=\"" . strtolower($item->getLabel()) . "\"" : ''; ?>>
+                <?php if ($item->getCount() > 0): ?>
+
+                    <a href="<?php echo $block->escapeUrl($filterModel->getItemUrl($item)) ?>">
+                        <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" <?php echo $filterModel->isSelected($item) ? 'checked="checked"' : ''  ?> class="layer-input-filter" name="filter_<?php echo $attCode ?>">
+                        <?php echo $item->getLabel() ?>
+                        <?php if ($filterModel->isShowCounter($filter)): ?>
+                            <span class="count">(<?php echo $item->getCount()?>)</span>
+                        <?php endif; ?>
+                    </a>
+
+                <?php elseif($filterModel->isShowZero($filter)): ?>
+                    <input type="<?php echo $filterModel->isMultiple($filter) ? 'checkbox' : 'radio' ?>" disabled="disabled" class="layer-input-filter" name="filter_<?php echo $attCode ?>"/>
+                    <?php echo $item->getLabel() ?>
+                    <?php if ($filterModel->isShowCounter($filter)): ?>
+                        <span class="count">(<?php echo $item->getCount()?>)</span>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach ?>
+
+
+    <?php endif; ?>
+
+
+</ol>

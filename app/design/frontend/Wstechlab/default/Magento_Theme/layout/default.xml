@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="default_head_blocks"/>
+    <head>
+        <remove src="HelloBrave_CookieCompliance::css/hellobrave_cookiecompliance.css"/>
+        <remove src="Mageplaza_Shopbybrand::css/style.css"/>
+        <remove src="Mageplaza_Core::css/font-awesome.min.css"/>
+    </head>
+    <body>
+        <referenceContainer name="header.container">
+            <container name="header.stores.switchers" htmlClass="switchers" htmlTag="div" before="-" />
+        </referenceContainer>
+
+        <move element="store_switch_dropdown" destination="header.stores.switchers" before="store_language" />
+        <move element="store_language" destination="header.stores.switchers" before="currency" />
+        <move element="currency" destination="header.stores.switchers" />
+
+        <move element="minicart" destination="header.panel" after="-"/>
+        <move element="top.search" destination="header.panel" before="header.links"/>
+        <!--<move element="wishlist" destination="header.panel" after="header.links"/>-->
+        <move element="menumobile" destination="header.panel" after="minicart"/>
+
+        <move element="sidebar.additional" destination="sidebar.main" after="-" />
+
+        <referenceBlock name="sidebar.container" remove="true" />
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
+        <referenceBlock name="advanced-search-link" remove="true" />
+
+        <move element="hellobrave_cookiecompliance" destination="before.body.end" after="-" />
+
+        <referenceContainer name="page.top">
+            <referenceBlock name="catalog.topnav" remove="true"/>
+
+            <referenceBlock name="store.menu" >
+                <arguments>
+                    <argument name="class" translate="false" xsi:type="string">menu</argument>
+                </arguments>
+
+                <block class="Blackbird\MenuManager\Block\Menu" name="menu.topnav">
+                    <arguments>
+                        <argument name="menu" xsi:type="string">menu</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+
+            <referenceBlock name="store.links" remove="true" />
+            <referenceBlock name="store.settings.currency" remove="true" />
+
+            <referenceBlock name="navigation.sections">
+                <block class="Magento\Framework\View\Element\Template" name="store.buttons" group="navigation-sections" template="Magento_Theme::html/buttons.phtml" >
+                    <arguments>
+                        <argument name="title" translate="true" xsi:type="string">Buttons</argument>
+                        <argument name="priority" xsi:type="string">1</argument>
+                    </arguments>
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" name="account-link-button" template="Magento_Theme::account/link/account.phtml"/>
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link-login-button" template="Magento_Theme::account/link/authorization.phtml"/>
+                    <block class="Magento\Customer\Block\Account\RegisterLink" name="register-link-button" template="Magento_Theme::account/link/register.phtml" />
+                </block>
+            </referenceBlock>
+
+            <referenceBlock name="store.settings" >
+                <arguments>
+                    <argument name="title" translate="false" xsi:type="string">Settings</argument>
+                </arguments>
+
+                <block class="Wstechlab\Theme\Block\StoreSwitcher" name="store.settings.shipping" template="Wstechlab_Theme::html/header/store_switcher.phtml">
+                    <arguments>
+                        <argument name="id_modifier" xsi:type="string">nav</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+
+        </referenceContainer>
+
+        <move element="header-wrapper" destination="header.container" before="header.panel.wrapper" />
+
+        <move element="navigation.sections" destination="header.container" before="header.panel.wrapper" />
+
+        <move element="catalog.compare.link" destination="header.links" />
+
+        <referenceContainer name="header.panel">
+            <referenceBlock name="skip_to_content" remove="true"/>
+        </referenceContainer>
+
+        <referenceBlock name="footer_links" remove="true"/>
+
+        <referenceContainer name="footer">
+            <!-- 4 static blocks with footer links and additional data -->
+
+            <block class="Magento\Framework\View\Element\Template" name="footer_columns"
+                   after="-" template="Magento_Theme::html/footer_columns.phtml">
+                <block class="Magento\Cms\Block\Block" name="footer_column_1">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_1</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer_column_2">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_2</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer_column_3">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_3</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer_column_4">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_4</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="header.links">
+            <block class="Magento\Customer\Block\Account\AuthorizationLink"
+                   name="authorization-link-login3"
+                   template="Magento_Theme::account/link/authorization.phtml"/>
+
+            <referenceBlock name="register-link" remove="true"/>
+            <referenceBlock name="authorization-link-login" remove="true"/>
+
+            <block class="Magento\Framework\View\Element\Html\Link" name="wishlist" before="minicart">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="false">Wishlist</argument>
+                    <argument name="path" xsi:type="string" translate="false">wishlist</argument>
+                </arguments>
+            </block>
+
+            <block class="Magento\Framework\View\Element\Html\Link" name="menumobile" after="minicart">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="false">Menu Mobile</argument>
+                    <argument name="path" xsi:type="string" translate="false">menu-mobile</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceBlock name="minicart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::cart/minicart.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="customer">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::account/customer.phtml</argument>
+            </action>
+        </referenceBlock>
+        
+        <referenceBlock name="wishlist">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::account/link/wishlist.phtml</argument>
+            </action>
+        </referenceBlock>
+        
+        <referenceBlock name="menumobile">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::html/menumobile.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="authentication-popup">
+            <block class="Mageplaza\SocialLogin\Block\Popup\Social" name="social-buttons-extra" template="Mageplaza_SocialLogin::popup/form/authentication/buttons-list.phtml" />
+
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="authenticationPopup" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="social-buttons" xsi:type="array">
+                                    <item name="component" xsi:type="string">Mageplaza_SocialLogin/js/view/social-buttons</item>
+                                    <item name="displayArea" xsi:type="string">social-extra-buttons</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
