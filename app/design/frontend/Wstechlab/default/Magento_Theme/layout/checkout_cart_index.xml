@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout-cart" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.header.wrapper.left">
+            <block class="Magento\Framework\View\Element\Template" name="checkout-header-addresses" template="Magento_Checkout::layout/header-addresses.phtml" />
+        </referenceContainer>
+
+        <referenceContainer name="checkout.header.wrapper.right">
+            <block class="Magento\Framework\View\Element\Template" name="checkout-header-continue-shopping" template="Magento_Checkout::layout/header-continue-shopping.phtml" />
+        </referenceContainer>
+
+        <referenceBlock name="checkout.cart.item.renderers.default.actions.edit" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions.edit" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.bundle.actions.edit" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.downloadable.actions.edit" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.grouped.actions.edit" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.configurable.actions.edit" remove="true" />
+
+
+        <referenceBlock name="checkout.cart.item.renderers.default.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.bundle.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.downloadable.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.grouped.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.configurable.actions.move_to_wishlist" remove="true" />
+
+        <referenceBlock name="checkout.cart.methods.multishipping" remove="true" />
+
+        <referenceBlock name="checkout.cart.item.renderers.default.actions">
+            <block class="Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist" name="checkout.cart.item.renderers.default.actions.wishlist" template="Magento_Checkout::cart/item/renderer/actions/wishlist.phtml" before="checkout.cart.item.renderers.default.actions.remove" />
+        </referenceBlock>
+
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions">
+            <block class="Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist" name="checkout.cart.item.renderers.simple.actions.wishlist" template="Magento_Checkout::cart/item/renderer/actions/wishlist.phtml" before="checkout.cart.item.renderers.simple.actions.remove" />
+        </referenceBlock>
+
+        <referenceBlock name="checkout.cart.item.renderers.configurable.actions">
+            <block class="Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist" name="checkout.cart.item.renderers.configurable.actions.wishlist" template="Magento_Checkout::cart/item/renderer/actions/wishlist.phtml" before="checkout.cart.item.renderers.configurable.actions.remove" />
+        </referenceBlock>
+
+        <referenceBlock name="checkout.cart.item.renderers.grouped.actions">
+            <block class="Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist" name="checkout.cart.item.renderers.grouped.actions.wishlist" template="Magento_Checkout::cart/item/renderer/actions/wishlist.phtml" before="checkout.cart.item.renderers.grouped.actions.remove" />
+        </referenceBlock>
+
+        <referenceBlock name="checkout.cart.item.renderers.bundle.actions">
+            <block class="Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist" name="checkout.cart.item.renderers.configurable.bundle.wishlist" template="Magento_Checkout::cart/item/renderer/actions/wishlist.phtml" before="checkout.cart.item.renderers.configurable.bundle.remove" />
+        </referenceBlock>
+
+        <referenceContainer name="cart.summary">
+            <block class="Magento\Framework\View\Element\Template" name="sc.summary.callout.wrapper" template="Magento_Checkout::cart/summary-callout-wrapper.phtml" >
+                <block class="Magento\Cms\Block\Block" name="sc.summary.callout">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">sc_summary_callout</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="checkout.cart.form">
+            <block class="Magento\Cms\Block\Block" name="sc.cart.list.callout">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">sc_cart_list_callout</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceContainer name="checkout.cart.container">
+            <container name="cart.summary.wrapper" htmlTag="div" htmlClass="cart-summary-wrapper" after="checkout.cart.form" />
+        </referenceContainer>
+
+        <move element="cart.summary" destination="cart.summary.wrapper"/>
+
+        <move element="checkout.cart.coupon" destination="checkout.cart.form" />
+
+        <move element="checkout.cart.crosssell" destination="main" />
+
+        <move element="page.main.title" destination="checkout.cart.form" />
+    </body>
+</page>

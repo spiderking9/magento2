@@ -1,0 +1,37 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<li click="element.selectShippingMethod" >
+    <div class="col col-method">
+        <input type="radio" class="radio" ifnot="method.error_message" ko-checked="element.isSelected" ko-value="method.carrier_code + '_' + method.method_code" attr="'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code, 'checked': element.rates().length == 1 || element.isSelected" />
+        <label ifnot="method.error_message">
+            <span class="method-label">
+                <span class="col-method" attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code" text="method.method_title"></span>
+                <span class="separator"> - </span>
+                <span class="col-price">
+                    <each args="element.getRegion('price')" render="" />
+                </span>
+            </span>
+            <span class="col-carrier" attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code" text="method.carrier_title"></span>
+        </label>
+        <span class="method-label enabled" if="method.error_message">
+            <span class="col-method" attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code" text="method.method_title"></span>
+            <span class="col-carrier" attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code" text="method.carrier_title"></span>
+            <span class="separator"> - </span>
+            <span class="col-price">
+                <each args="element.getRegion('price')" render="" />
+            </span>
+        </span>
+    </div>
+    <div class="method-error" if="method.error_message">
+        <div class="col col-error" colspan="4">
+            <div role="alert" class="message mage-error" text="method.error_message"></div>
+            <span class="no-display">
+                <input type="radio" attr="'value' : method.method_code, 'id': 's_method_' + method.method_code" />
+            </span>
+        </div>
+    </div>
+</li>

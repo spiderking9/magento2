@@ -1,0 +1,68 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+
+/**
+*  General template for displaying group of blocks devided into sections
+*/
+
+$group = $block->getGroupName();
+$groupCss = $block->getGroupCss();
+//$groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"tabs":{"openedState":"active"}}';
+
+?>
+
+<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
+
+    <div class="sections <?= /* @escapeNotVerified */ $groupCss ?>">
+
+        <?php
+            $layout = $block->getLayout();
+            $newPriority = array();
+        ?>
+
+        <button class="section-close toggle-menu">
+            <i class="material-icons">clear</i>
+        </button>
+
+        <div class="section-items <?= /* @escapeNotVerified */ $groupCss ?>-items" >
+            <?php foreach ($detailedInfoGroup as $name): ?>
+                <?php
+                    $html = $layout->renderElement($name);
+
+                    if (!trim($html) && ($block->getUseForce() != true)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+
+                    $class = $block->getChildData($alias, 'class') ? $block->getChildData($alias, 'class') : strtolower($label);
+
+                    $priority = $block->getChildData($alias, 'priority') ? $block->getChildData($alias, 'priority') : '10';
+
+                    array_push($newPriority, ['alias' => $alias, 'label' => $label, 'priority' => $priority, 'html' => $html, 'cssClass' => $class]);
+                ?>
+            <?php endforeach;?>
+
+            <?php
+                # Sort array by priority
+                usort($newPriority, function($a, $b) {
+                    return $a['priority'] <=> $b['priority'];
+                });
+                foreach ($newPriority as $section):
+            ?>
+
+                <div class="section-item-content section-item-content-<?= $section['cssClass'] ?> <?php /* @escapeNotVerified */ echo $groupCss ?>-item-content" id="<?php /* @escapeNotVerified */ echo $section['alias']; ?>" data-role="content"><?php /* @escapeNotVerified */ echo $section['html']; ?></div>
+            <?php endforeach; ?>
+
+        </div>
+        <div class="nav-sections-overlay"></div>
+    </div>
+<?php endif; ?>

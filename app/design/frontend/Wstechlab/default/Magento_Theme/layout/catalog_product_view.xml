@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.addtocart.additional">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.addtocart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.media.image">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::product/view/gallery.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="product.info.main">
+            <container name="product.info.shippingoption.block" htmlTag="div" htmlClass="product-spedition-tabs">
+                <block class="Magento\Framework\View\Element\Template" name="product.info.shippingoption" template="Magento_Catalog::product/view/shipping.phtml"/>
+            </container>
+            <container name="product.sku_review" htmlTag="div" htmlClass="products-sku-review" before="product.info.price" />
+        </referenceContainer>
+
+        <referenceContainer name="product.info.media">
+            <container name="product.info.media.text.block" htmlTag="div" htmlClass="media-text" after="-">
+                <block class="Magento\Framework\View\Element\Template" name="product.info.media.text" template="Magento_Catalog::product/view/media-text.phtml"/>
+            </container>
+        </referenceContainer>
+
+        <move element="breadcrumbs" destination="product.info.media" before="-" />
+
+        <move element="product.info.media" destination="content" before="product.info.main"/>
+        <move element="product.price.tier" destination="product.info.price" />
+
+        <move element="product.info.stock.sku" destination="product.sku_review"/>
+        <move element="product.info.review" destination="product.sku_review" />
+
+        <move element="product.info.overview" destination="product.info.main" after="product.sku_review" />
+
+        <move element="content.aside" destination="page.bottom.container" after="-" />
+
+        <referenceBlock name="product.info.shippingoption.block" remove="true" />
+        <referenceBlock name="related.post.tab" remove="true" />
+        <referenceBlock name="related.brand.product.tab" remove="true" />
+    </body>
+</page>

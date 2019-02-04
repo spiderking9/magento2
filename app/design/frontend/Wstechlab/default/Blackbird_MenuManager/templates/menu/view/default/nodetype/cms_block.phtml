@@ -1,0 +1,29 @@
+<?php
+/**
+ * Blackbird MenuManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category            Blackbird
+ * @package		Blackbird_MenuManager
+ * @copyright           Copyright (c) 2016 Blackbird (http://black.bird.eu)
+ * @author		Blackbird Team
+ */
+?>
+<?php /** @var $block Blackbird\MenuManager\Block\NodeType\CmsBlock */?>
+
+<?php if($block->getStatus()):?>
+    <?php if($block->getBlockContent()):?>
+        <li class="<?= implode(' ', $block->getClasses())?> item-type-cms-block">
+               <?php echo $block->getProcessedData($block->getBlockContent()); ?>
+            <?php if($block->getChildren()):?>
+                <ul class="level<?=$block->getLevel();?> submenu">
+                    <?php echo $block->getData('children') ?>
+                </ul>
+            <?php endif;?>
+        </li>
+    <?php endif;?>
+<?php endif;?>

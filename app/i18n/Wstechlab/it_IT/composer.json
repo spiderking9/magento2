@@ -1,0 +1,18 @@
+{
+  "name": "wstechlab/language-it_it",
+  "description": "Itialian (IT) language",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "require": {
+    "magento/framework": "100.1.*"
+  },
+  "type": "magento2-language",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+    $_helper    = $this->helper('Magento\Catalog\Helper\Output');
+    $_category  = $block->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_category->getCustomProductsPage()) {
+        // $_category->getCustomProductsPage() returns 'route' value of current page
+        // Examples: Promozioni -> promozioni, Tier prices page -> tier-prices-page
+         $blockId = 'page-' . $_category->getCustomProductsPage() . '-image';
+         echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($blockId)->toHtml();
+    } else {
+        if ($_imgUrl = $_category->getImageUrl()) {
+            $_imgHtml = '<div class="category-image" style="background-image: url(' .$_imgUrl. ')" >'
+                . '<img src="' . $_imgUrl . '" alt="' . $block->escapeHtml($_category->getName()) . '" title="' . $block->escapeHtml($_category->getName()) . '" class="image" />'
+                . '</div>';
+            $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+            /* @escapeNotVerified */ echo $_imgHtml;
+        }
+    }
+
+?>

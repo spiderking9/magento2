@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="checkout-success">
+    <?php echo $block->getChildHtml('page.main.title'); ?>
+    <hr />
+    <strong><?php echo __('Your order has been completed correctly.'); ?></strong>
+
+    <?php if ($block->getOrderId()):?>
+        <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('success_page_info')->toHtml(); ?>
+
+        <?php if ($block->getCanViewOrder()) :?>
+            <p class="order-number"><?= __('Your order number is: %1.', sprintf('<a href="%s" ><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
+        <?php  else :?>
+            <p class="order-number"><?= __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
+        <?php endif;?>
+    <?php endif;?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= /* @escapeNotVerified */ $block->getContinueUrl() ?>"><span><?= /* @escapeNotVerified */ __('Continue Shopping') ?></span></a>
+        </div>
+    </div>
+
+    <?= $block->getChildHtml('checkout.registration'); ?>
+</div>
+
+<?= $block->getChildHtml('checkout_success_bottom'); ?>

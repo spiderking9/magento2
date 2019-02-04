@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Magento_Swatches::css/swatches.css" />
+    </head>
+    <body>
+        <move element="page.main.title" destination="category.description" />
+        <move element="breadcrumbs" destination="category.description" />
+
+        <move element="category.cms" destination="content" />
+
+        <referenceContainer name="page.bottom.container">
+            <container name="product.inner" htmlTag="div" htmlClass="product-collections">
+                <container name="product.collections1" htmlTag="div" htmlClass="collections1">
+                    <block class="Magento\Framework\View\Element\Template" name="product.collection.slider" template="Magento_Catalog::product/view/collections-slider.phtml"/>
+                </container>
+
+                <container name="product.collections2" htmlTag="div" htmlClass="collections2">
+                    <block class="Magento\Cms\Block\Block" name="catalog_collection_4">
+                        <arguments>
+                            <argument name="block_id" xsi:type="string" translate="true">catalog_collection_4</argument>
+                        </arguments>
+                    </block>
+                    <container name="homepage.instagram.widget" htmlTag="div" htmlClass="instagram-widget-container" before="catalog_collection_4">
+                        <block class="Bitbull\InstagramWidget\Block\Instagram"
+                               name="instagram.widget"
+                               template="Bitbull_InstagramWidget::instagram-widget.phtml"
+                               ifconfig="instagram/settings/enabled_homepage">
+                            <arguments>
+                                <argument translate="true" name="title" xsi:type="string">Instagram</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+        </referenceContainer>
+
+    </body>
+</page>
