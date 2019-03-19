@@ -13,6 +13,7 @@ return [
         'Magento_Indexer' => 1,
         'Magento_Cms' => 1,
         'Magento_Catalog' => 1,
+        'Magebees_QuotationManagerPro' => 1,
         'Magento_Quote' => 1,
         'Magento_AdvancedPricingImportExport' => 1,
         'Magento_Config' => 1,
@@ -146,6 +147,12 @@ return [
         'Mageplaza_Smtp' => 1,
         'Mageplaza_SocialLogin' => 1,
         'MagicToolbox_MagicZoom' => 1,
+        'Nikal_Contact' => 1,
+        'Nikal_Minicart' => 1,
+        'Nikal_Products' => 1,
+        'Nikal_Setup' => 1,
+        'Nikal_Swatches' => 1,
+        'Packt_ProductSlider' => 1,
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1,
         'WebShopApps_MatrixRate' => 1,
@@ -156,6 +163,7 @@ return [
         'Wstechlab_ContentManager' => 1,
         'Wstechlab_DoctorRegister' => 1,
         'Wstechlab_LayeredNavigation' => 1,
+        'Wstechlab_MageplazaBlogFix' => 1,
         'Wstechlab_SocialLogin' => 1,
         'Wstechlab_Theme' => 1
     ]
